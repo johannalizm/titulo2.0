@@ -12,7 +12,9 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-     super
+    build_resource(sign_up_params)
+    resource.save
+    redirect_to '/'
   end
 
   # GET /resource/edit
