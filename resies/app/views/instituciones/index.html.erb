@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Instituciones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre Institución</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @instituciones.each do |institucione| %>
+      <tr>
+        <td><%= institucione.nombre %></td>
+        <td><%= link_to 'Mostrar Datos ', institucione %></td>
+        <td><%= link_to 'Editar', edit_institucione_path(institucione) %></td>
+        <td><%= link_to 'Eliminar', institucione, method: :delete, data: { confirm: 'Esta seguro que desea eliminar esta institución?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Agregar Nueva Institución', new_institucione_path %>

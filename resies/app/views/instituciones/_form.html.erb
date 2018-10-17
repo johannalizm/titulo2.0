@@ -1,0 +1,56 @@
+<%= form_with(model: institucione, local: true) do |form| %>
+  <% if institucione.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(institucione.errors.count, "error") %> Prohibido que esta institución se guarde </h2>
+
+      <ul>
+      <% institucione.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= "Logo Institución :" %>
+    <%= form.file_field :avatar %>
+  </div>
+
+  <div class="field">
+    <%= "Nombre de la Institución :" %>
+    <%= form.text_field :nombre, id: :institucione_nombre %>
+  </div>
+
+  <div class="field">
+    <%= "Tipo de Institución :" %>
+    <%= form.collection_select :tipoinstitucione_id, Tipoinstitucione.all, :id, :nombre  %>
+  </div>
+
+  <div class="field">
+    <%= "Tipo de institución en relación a vínculo con organismos públicos :"  %>
+    <%= form.collection_select :tiporelacione_id, Tiporelacione.all, :id, :nombre %>
+  </div>
+
+  <div class="field">
+    <%= "Dirección :" %>
+    <%= form.text_field :direccion, id: :institucione_direccion %>
+  </div>
+
+  <div class="field">
+    <%= "País :"  %>
+    <%= form.collection_select :paise_id, Paise.all, :id, :nombre %>
+  </div>
+
+  <div class="field">
+    <%= "Región :"  %>
+    <%= form.collection_select :region_id, Region.all, :id, :nombre %>
+  </div>
+
+  <div class="field">
+    <%= "Codigo Postal :"%>
+    <%= form.number_field :codigopostal, id: :institucione_codigopostal %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

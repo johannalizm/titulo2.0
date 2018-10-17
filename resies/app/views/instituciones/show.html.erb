@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>LOGO:</strong>
+  <%= image_tag @institucione.avatar.url(:thumb) %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @institucione.nombre %>
+</p>
+
+<p>
+  <strong>Tipo de Institución:</strong>
+  <%= @institucione.tipoinstitucione.nombre %>
+</p>
+
+<p>
+  <strong>Tipo de Institución:</strong>
+  <%= @institucione.tiporelacione.nombre %>
+</p>
+<p>
+  <strong>Direccion:</strong>
+  <%= @institucione.direccion %>
+</p>
+<p>
+  <strong>Region:</strong>
+  <%= @institucione.region.nombre %>
+</p>
+
+<p>
+  <strong>Pais:</strong>
+  <%= @institucione.region.paise.nombre %>
+</p>
+
+<p>
+  <strong>Codigopostal:</strong>
+  <%= @institucione.codigopostal %>
+</p>
+
+<%= link_to 'Editar', edit_institucione_path(@institucione) %> |
+<%= link_to 'Volver', instituciones_path %>
