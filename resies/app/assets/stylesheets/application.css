@@ -13,3 +13,40 @@
 
  */
 @import "bootstrap";
+/* Font-Awesome v4.5.0 - (http://fortawesome.github.io/Font-Awesome/) */
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css") all;
+/* Google-Fonts */
+@import url("https://fonts.googleapis.com/css?family=Buenard:700") all;
+
+body {
+    #padding-top: 250px;
+}
+
+.zsx {
+background-color: #E0FFFF;
+}
+
+.zsx h1, .zsx h3{
+text-align:center;
+color:#fff;
+}
+
+.zsx h1{
+font-size:110px;
+font-family:'Buenard', serif;
+font-weight:bold;
+text-transform:inherit;
+margin: 0px auto 0px;
+text-shadow: 2px 2px 2px #000;
+-webkit-text-shadow: 2px 2px 2px #000;
+-moz-text-shadow: 2px 2px 2px #000;
+}
+
+.zsx h4{
+  font-size: 30px;
+}
+.zsx h3{
+font-size: 25px;
+font-weight:lighter;
+margin: 0px auto 15px;
+}
