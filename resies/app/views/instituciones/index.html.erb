@@ -39,9 +39,9 @@
             <td><%= institucione.tipoinstitucione.nombre %></td>
             <td><%= institucione.region.paise.nombre %></td>
             <td align="center">
-               <a><%= link_to 'Mostrar Datos ', institucione %></a>
-               <a><%= link_to 'Editar', edit_institucione_path(institucione) %></a>
-               <a><%= link_to 'Eliminar', institucione, method: :delete, data: { confirm: 'Esta seguro que desea eliminar esta institución?' } %></a>
+               <a><%= link_to 'Mostrar Datos ', institucione, :class => "btn btn-success" %></a>
+               <a><%= link_to 'Editar', edit_institucione_path(institucione) , :class => "btn btn-warning"%></a>
+               <a><%= link_to 'Eliminar', institucione, method: :delete, data: { confirm: 'Esta seguro que desea eliminar esta institución?' }, :class => "btn btn-danger" %></a>
              </td>
             </tr>
           <% end %>
