@@ -36,12 +36,17 @@
         </button>
     <!-- <a class="navbar-brand" href="#top">TheBombHome</a> -->
       </div>
+      <div class="collapse navbar-collapse pull-left"  id="zsxnavcollapse" >
+        <ul class="nav navbar-nav">
+          <a class="navbar-brand" href="/" style="font-size:20pt">Inicio</a>
+        </ul>
+      </div>
       <div class="collapse navbar-collapse pull-right"  id="zsxnavcollapse" >
         <ul class="nav navbar-nav">
           <li style="font-size:20pt"><%= link_to 'Cerrar Session', destroy_user_session_path, method: :delete %></li>
         </ul>
       </div>
-        </div>
+    </div>
   </nav>
     <% end %>
 
