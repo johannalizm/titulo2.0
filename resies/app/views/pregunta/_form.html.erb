@@ -1,0 +1,71 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<%= stylesheet_link_tag "preg.css" %>
+<%= javascript_include_tag "pre", "data-turbolinks-track" => true  %>
+
+<%= form_with(model: preguntum, local: true) do |form| %>
+  <% if preguntum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(preguntum.errors.count, "error") %> prohibited this preguntum from being saved:</h2>
+
+      <ul>
+      <% preguntum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="container" style="padding-top:30px;">
+    <div class="stepwizard" >
+        <div class="stepwizard-row setup-panel" >
+            <div class="stepwizard-step col-xs-6" >
+                <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+                <p><small>Pregunta</small></p>
+            </div>
+            <div class="stepwizard-step col-xs-6">
+                <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                <p><small>Alternativas</small></p>
+            </div>
+        </div>
+    </div>
+        <div class="panel panel-default setup-content" id="step-1">
+            <div class="panel-heading" style="background-color: #E0FFFF">
+                 <h3 class="panel-title">Pregunta</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label">Indicador : </label>
+                    <%= form.text_field :identificador, id: :preguntum_identificador, class:'form-control', placeholder:' Ej: GOB1' %>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Pregunta : </label>
+                    <%= form.text_area :pregunta, id: :preguntum_pregunta,  class:'form-control', placeholder:'Ej: Existen instancias de representatividad para el conjunto de estudiantes elegidas de forma democrática. Estas deben representar a la totalidad de los estudiantes de la institución. ' %>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Categoria : </label>
+                    <%= form.select  :categoria, [['Datos Institucionales','Datos Institucionales'],['Gobernanza','Gobernanza'],['Cultura','Cultura'],['Academia','Academia'],['Campus','Campus'],['Responsabilidad Social','Responsabilidad Social']],{include_blank: 'Ingrese Categoria'} , {class: 'form-control'}%>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Sub-Categoria :</label>
+                    <%= form.select  :subcategoria, [['GOB1','GOB1'],['GOB2','GOB2'],['Cultura','cu'],['Academia','ac'],['Campus','gc'],['Responsabilidad Social','rs']],{include_blank: 'Ingrese Categoria'} , {class: 'form-control'}%>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tipo Respuesta :</label>
+                  <%= form.text_field :tiporespuesta, id: :preguntum_tiporespuesta,  class:'form-control', placeholder:'Ej:' %>
+                </div>
+                <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+            </div>
+
+        </div>
+
+        <div class="panel panel-primary setup-content" id="step-4">
+             <div class="panel-body">
+                 <button class="btn btn-success pull-right" type="submit">Finish!</button>
+             </div>
+         </div>
+        </div>
+    </form>
+</div>
+<%end%>

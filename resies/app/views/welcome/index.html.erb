@@ -1,9 +1,90 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<%= stylesheet_link_tag "menu.css" %>
+
+
 <html>
 <head>
 </head>
 <body>
-<%if !current_user%>
-    <%= render :file => '/devise/sessions/new' %>
+  <%if !current_user%>
+      <%= render :file => '/devise/sessions/new' %>
+  <% elsif current_user.rol=='user'%>
+  	<div class="container">
+  	<div class="row">
+  	<!--team-1-->
+  	<div class="col-lg-4">
+  	<div class="team-main">
+  	<div class="team-front">
+  	<img src="<%= asset_path 'datos.png'%>" class="img-fluid" />
+  	<h3><%= link_to "Datos Institucionales", edit_institucione_url(current_user)%></h3>
+  	</div>
+  	</div>
+  	</div>
+
+  	<!--team-2-->
+  	<div class="col-lg-4">
+  	<div class="team-main">
+  	<div class="team-front">
+  	<img src="<%= asset_path 'usuario.jpg'%>" class="img-fluid" />
+    <h3><a href="/users/edit">Editar Usuario</a></h3>
+  	</div>
+  	</div>
+  	</div>
+  	<!--team-2-->
+
+    <!--team-3-->
+  	<div class="col-lg-4">
+  	<div class="team-main">
+  	<div class="team-front">
+  	<img src="<%= asset_path 'encuesta2.png'%>" class="img-fluid" />
+    <h3><a href="">Encuesta</a></h3>
+  	</div>
+  	</div>
+  	</div>
+  	<!--team-3-->
+    </div>
+    </div>
+    <% elsif current_user.rol=='admin'%>
+    	<div class="container">
+    	<div class="row">
+    	<!--team-1-->
+    	<div class="col-lg-4">
+    	<div class="team-main">
+    	<div class="team-front">
+    	<img src="<%= asset_path 'usuario.jpg'%>" class="img-fluid" />
+    	<h3><a href="/users/sign_up">Nuevo Usuario</a></h3>
+    	</div>
+    	</div>
+    	</div>
+
+    	<!--team-2-->
+    	<div class="col-lg-4">
+    	<div class="team-main">
+    	<div class="team-front">
+    	<img src="<%= asset_path 'encuesta2.png'%>" class="img-fluid" />
+      <h3><a href="/instituciones/new">Nueva Institución</a></h3>
+    	</div>
+    	</div>
+      </div>
+    	<!--team-2-->
+
+      <!--team-3-->
+    	<div class="col-lg-4">
+    	<div class="team-main">
+    	<div class="team-front">
+    	<img src="<%= asset_path 'encuesta2.png'%>" class="img-fluid" />
+      <h3><a href="/instituciones">Instituciones</a></h3>
+    	</div>
+    	</div>
+    	</div>
+    	<!--team-3-->
+    </div>
+    </div>
 <%end%>
+
 </body>
 </html>

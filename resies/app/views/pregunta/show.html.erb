@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Identificador:</strong>
+  <%= @preguntum.identificador %>
+</p>
+
+<p>
+  <strong>Pregunta:</strong>
+  <%= @preguntum.pregunta %>
+</p>
+
+<p>
+  <strong>Categoria:</strong>
+  <%= @preguntum.categoria %>
+</p>
+
+<p>
+  <strong>Subcategoria:</strong>
+  <%= @preguntum.subcategoria %>
+</p>
+
+<p>
+  <strong>Tiporespuesta:</strong>
+  <%= @preguntum.tiporespuesta %>
+</p>
+
+<%= link_to 'Edit', edit_preguntum_path(@preguntum) %> |
+<%= link_to 'Back', pregunta_path %>

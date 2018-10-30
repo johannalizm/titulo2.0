@@ -19,6 +19,7 @@ class InstitucionesController < ApplicationController
 
   # GET /instituciones/1/edit
   def edit
+
   end
 
   # POST /instituciones
@@ -63,9 +64,9 @@ class InstitucionesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_institucione
+  def set_institucione
       @institucione = Institucione.find(params[:id])
-    end
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def institucione_params

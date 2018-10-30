@@ -10,7 +10,10 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w( login.css , mostrarins.js)
 Rails.application.config.assets.precompile += %w( mostrar.css)
 Rails.application.config.assets.precompile += %w( registro.css)
+Rails.application.config.assets.precompile += %w( preg.css)
 Rails.application.config.assets.precompile += %w( jr.js)
+Rails.application.config.assets.precompile += %w( pre.js)
+Rails.application.config.assets.precompile += %w( menu.css)
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.

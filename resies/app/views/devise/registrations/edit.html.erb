@@ -12,10 +12,10 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
          <div class="row myborder">
-             <h4 style=" font-family:'Buenard', serif; color: #72c02c; margin: initial; margin-bottom: 10px; font-size: 30pt; text-align:center;">Registrar</h4><hr>
+             <h4 style=" font-family:'Buenard', serif; color: #72c02c; margin: initial; margin-bottom: 10px; font-size: 30pt; text-align:center;">Editar</h4><hr>
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user mycolor"></i></span>
-                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', :disabled=>true %>
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                 <div><% resource.unconfirmed_email %></div>
             <% end %></div>
@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <button class="btn-u pull-left" type="submit">Editar</button>
-                    <button class="btn-u pull-right" type="back">Volver</button>
+
                 </div>
             </div>
         </div>
