@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre encargado:</strong>
+  <%= @formulario.nombre_encargado %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @formulario.telefono %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @formulario.fecha %>
+</p>
+
+<ol>
+
+  <% @pregunta.each do |preguntum| %>
+   <% for resultado in @formulario.resultados %>
+      <% if preguntum.id == resultado.pregunta_id  %>
+        <li><%= preguntum.pregunta %></li>
+        <td><%= resultado.respuesta %></td></br>
+        <td><%= resultado.descripcion %></td></br>
+        <td><%= resultado.verificacion %></td></br>
+        <td><%= resultado.comentario %></td>
+        <% end %>
+    <% end %>
+  <% end %>
+</ol>
+
+<%= link_to 'Edit', edit_formulario_path(@formulario) %> |
+<%= link_to 'Back', formularios_path %>

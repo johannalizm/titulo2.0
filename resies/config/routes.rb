@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :formularios
   resources :pregunta
   resources :instituciones
   devise_for :users, controllers: {:registrations => 'user/registrations', :confirmations =>'user/confirmations'}

@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181023194502) do
+ActiveRecord::Schema.define(version: 20181113190417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "formularios", force: :cascade do |t|
+    t.string "nombre_encargado"
+    t.string "telefono"
+    t.date "fecha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "instituciones", force: :cascade do |t|
     t.string "nombre"
@@ -57,6 +65,19 @@ ActiveRecord::Schema.define(version: 20181023194502) do
     t.index ["paise_id"], name: "index_regions_on_paise_id"
   end
 
+  create_table "resultados", force: :cascade do |t|
+    t.string "respuesta"
+    t.string "comentario"
+    t.string "verificacion"
+    t.string "descripcion"
+    t.bigint "formulario_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "pregunta_id"
+    t.index ["formulario_id"], name: "index_resultados_on_formulario_id"
+    t.index ["pregunta_id"], name: "index_resultados_on_pregunta_id"
+  end
+
   create_table "tipoinstituciones", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
@@ -90,4 +111,6 @@ ActiveRecord::Schema.define(version: 20181023194502) do
   add_foreign_key "instituciones", "tipoinstituciones"
   add_foreign_key "instituciones", "tiporelaciones"
   add_foreign_key "regions", "paises"
+  add_foreign_key "resultados", "formularios"
+  add_foreign_key "resultados", "pregunta", column: "pregunta_id"
 end

@@ -1,0 +1,697 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<%= stylesheet_link_tag "preg.css" %>
+<%= javascript_include_tag "pre", "data-turbolinks-track" => true  %>
+
+<%= form_with(model: formulario, local: true) do |form| %>
+  <% if formulario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(formulario.errors.count, "error") %> prohibited this formulario from being saved:</h2>
+
+      <ul>
+      <% formulario.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="container" style="padding-top:30px;">
+  <div class="stepwizard">
+     <div class="stepwizard-row setup-panel">
+         <div class="stepwizard-step col-xs-2">
+             <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+             <p><small style= "color: #000; font-size:15px">Datos Encargados</small></p>
+         </div>
+         <div class="stepwizard-step col-xs-2">
+             <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+             <p><small style= "color: #000; font-size:15px">Datos Institucionales</small></p>
+         </div>
+         <div class="stepwizard-step col-xs-1">
+             <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+             <p><small style= "color: #000; font-size:15px">Gobernanza</small></p>
+         </div>
+         <div class="stepwizard-step col-xs-2">
+             <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+             <p><small style= "color: #000; font-size:15px">Cultura</small></p>
+         </div>
+         <div class="stepwizard-step col-xs-1">
+             <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+             <p><small style= "color: #000; font-size:15px">Academia</small></p>
+         </div>
+         <div class="stepwizard-step col-xs-2">
+             <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+             <p><small style= "color: #000; font-size:15px">Campus</small></p>
+         </div>
+         <div class="stepwizard-step col-xs-2">
+             <a href="#step-7" type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
+             <p><small style= "color: #000; font-size:15px">Responsabilidad Social</small></p>
+         </div>
+     </div>
+  </div>
+    <div class="panel panel-default setup-content" id="step-1">
+            <div class="panel-heading" style="background-color: #E0FFFF">
+                 <h3 class="panel-title">Datos Encargados</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label"> Nombre Encargado: </label>
+                    <%= form.text_field :nombre_encargado, id: :formulario_nombre_encargado, class:'form-control', placeholder:' Ej: Juan Alberto Bustos Garcia' %>
+                </div>
+                <div class="form-group">
+                        <label class="control-label"> Telefono: </label>
+                        <%= form.text_field :telefono, id: :formulario_telefono, class:'form-control', placeholder:' Ej: 961476243' %>
+                </div>
+                <div class="form-group">
+                      <label class="control-label"> Fecha: </label>
+                      <%= form.date_field :fecha, id: :formulario_fecha, class:'form-control'%>
+                </div>
+                <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+            </div>
+        </div>
+
+    <div class="panel panel-default setup-content" id="step-2">
+          <div class="panel-heading" style="background-color: #E0FFFF">
+               <h3 class="panel-title" >Datos Institucionales</h3>
+          </div>
+          <div class="panel-body">
+          </br>
+             <% @pregunta.each do |preguntum| %>
+                <%= form.fields_for :resultados do |s| %>
+                  <% if preguntum.categoria == 'Datos Institucionales' %>
+                     <% if preguntum.subcategoria == 'Poblacion' %>
+                       <div class="panel-heading " style="background-color: #E0FFFF">
+                         <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                       </div>
+                       <li><%= preguntum.pregunta %></li>
+                       <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                       <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                       <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                       <%= s.text_field :comentario, placeholder:'Comentario' %>
+                       <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+                     <% elsif preguntum.subcategoria == 'Instalaciones' %>
+                       <div class="panel-heading " style="background-color: #E0FFFF">
+                         <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                       </div>
+                       <li><%= preguntum.pregunta %></li>
+                       <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                       <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                       <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                       <%= s.text_field :comentario, placeholder:'Comentario' %>
+                       <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+                     <% elsif preguntum.subcategoria == 'Año Base' %>
+                       <div class="panel-heading " style="background-color: #E0FFFF">
+                         <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                       </div>
+                       <li><%= preguntum.pregunta %></li>
+                       <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                       <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                       <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                       <%= s.text_field :comentario, placeholder:'Comentario' %>
+                       <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+                    <% end %>
+                   <%end%>
+                 <% end %>
+               <% end %>
+              <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+          </div>
+    </div>
+
+    <div class="panel panel-default setup-content" id="step-3">
+       <div class="panel-heading" style="background-color: #E0FFFF">
+          <h3 class="panel-title" >Gobernanza</h3>
+       </div>
+       <div class="panel-body">
+         </br>
+              <% @pregunta.each do |preguntum| %>
+                 <%= form.fields_for :resultados do |s| %>
+                   <% if preguntum.categoria == 'Gobernanza' %>
+                      <% if preguntum.subcategoria == 'GOB1. Participación de grupos de interés' %>
+                        <div class="panel-heading " style="background-color: #E0FFFF">
+                          <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                        </div>
+                        <li><%= preguntum.pregunta %></li>
+                        <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                        <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                        <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                        <%= s.text_field :comentario, placeholder:'Comentario' %>
+                        <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+                      <% elsif preguntum.subcategoria == 'GOB2. Compromiso Institucional' %>
+                        <div class="panel-heading " style="background-color: #E0FFFF">
+                          <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                        </div>
+                        <li><%= preguntum.pregunta %></li>
+                        <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                        <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                        <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                        <%= s.text_field :comentario, placeholder:'Comentario' %>
+                        <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+                      <% elsif preguntum.subcategoria == 'GOB3. Plan/Estrategia de Sustentabilidad ' %>
+                        <div class="panel-heading " style="background-color: #E0FFFF">
+                          <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                        </div>
+                        <li><%= preguntum.pregunta %></li>
+                        <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                        <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                        <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                        <%= s.text_field :comentario, placeholder:'Comentario' %>
+                        <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+                        <% elsif preguntum.subcategoria == 'GOB4. Reportabilidad y Transparencia ' %>
+                          <div class="panel-heading " style="background-color: #E0FFFF">
+                            <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                          </div>
+                          <li><%= preguntum.pregunta %></li>
+                          <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                          <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                          <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                          <%= s.text_field :comentario, placeholder:'Comentario' %>
+                          <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+                        <% elsif preguntum.subcategoria == 'GOB5. Huella de Carbono ' %>
+                          <div class="panel-heading " style="background-color: #E0FFFF">
+                            <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                          </div>
+                          <li><%= preguntum.pregunta %></li>
+                          <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                          <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                          <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                          <%= s.text_field :comentario, placeholder:'Comentario' %>
+                          <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+                        <% elsif preguntum.subcategoria == 'GOB6. Coordinación Sustentabilidad ' %>
+                          <div class="panel-heading " style="background-color: #E0FFFF">
+                            <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                          </div>
+                          <li><%= preguntum.pregunta %></li>
+                          <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                          <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                          <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                          <%= s.text_field :comentario, placeholder:'Comentario' %>
+                          <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+                     <% end %>
+                    <%end%>
+                  <% end %>
+                <% end %>
+               <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+           </div>
+    </div>
+
+    <div class="panel panel-default setup-content" id="step-4">
+         <div class="panel-heading" style="background-color: #E0FFFF">
+              <h3 class="panel-title" >Cultura</h3>
+         </div>
+         <div class="panel-body">
+         </br>
+            <% @pregunta.each do |preguntum| %>
+               <%= form.fields_for :resultados do |s| %>
+                 <% if preguntum.categoria == 'Cultura' %>
+                    <% if preguntum.subcategoria == 'CU1. Estudiantes promotores de la Sustentabilidad ' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                    <% elsif preguntum.subcategoria == 'CU2. Inducción a la Sustentabilidad para estudiantes' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                    <% elsif preguntum.subcategoria == 'CU3. Funcionarios promotores de la Sustentabilidad ' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                   <% elsif preguntum.subcategoria == 'CU4.Inducción a la sustentabilidad para funcionarios ' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                  <% elsif preguntum.subcategoria == 'CU5. Programa de prácticas sustentables para oficinas' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                 <% elsif preguntum.subcategoria == 'CU6. Programa de desarrollo profesional en sustentabilidad' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                <% elsif preguntum.subcategoria == 'CU7. Actividades de difusión y sensibilización' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                <% end %>
+              <%end%>
+            <% end %>
+          <% end %>
+             <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+         </div>
+    </div>
+
+    <div class="panel panel-default setup-content" id="step-5">
+        <div class="panel-heading" style="background-color: #E0FFFF">
+             <h3 class="panel-title" >Academia</h3>
+        </div>
+        <div class="panel-body">
+        </br>
+           <% @pregunta.each do |preguntum| %>
+              <%= form.fields_for :resultados do |s| %>
+                <% if preguntum.categoria == 'Academia' %>
+                   <% if preguntum.subcategoria == 'AC1. Curso mínimo transversal de pregrado' %>
+                     <div class="panel-heading " style="background-color: #E0FFFF">
+                       <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                     </div>
+                     <li><%= preguntum.pregunta %></li>
+                     <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                     <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                     <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                     <%= s.text_field :comentario, placeholder:'Comentario' %>
+                     <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                   <% elsif preguntum.subcategoria == 'CU2. Capacitación profesores' %>
+                     <div class="panel-heading " style="background-color: #E0FFFF">
+                       <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                     </div>
+                     <li><%= preguntum.pregunta %></li>
+                     <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                     <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                     <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                     <%= s.text_field :comentario, placeholder:'Comentario' %>
+                     <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                   <% elsif preguntum.subcategoria == 'CU3. Evaluación conocimiento sustentabilidad de estudiantes ' %>
+                     <div class="panel-heading " style="background-color: #E0FFFF">
+                       <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                     </div>
+                     <li><%= preguntum.pregunta %></li>
+                     <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                     <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                     <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                     <%= s.text_field :comentario, placeholder:'Comentario' %>
+                     <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                  <% elsif preguntum.subcategoria == 'CU4. Programas de postgrado que incluyen competencias en sustentabilidad' %>
+                    <div class="panel-heading " style="background-color: #E0FFFF">
+                      <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                    </div>
+                    <li><%= preguntum.pregunta %></li>
+                    <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                    <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                    <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                    <%= s.text_field :comentario, placeholder:'Comentario' %>
+                    <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                <% elsif preguntum.subcategoria == 'CU5. Programas de pregrado que incluyen competencias en sustentabilidad ' %>
+                   <div class="panel-heading " style="background-color: #E0FFFF">
+                     <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                   </div>
+                   <li><%= preguntum.pregunta %></li>
+                   <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                   <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                   <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                   <%= s.text_field :comentario, placeholder:'Comentario' %>
+                   <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                <% elsif preguntum.subcategoria == 'CU6. Apoyo a la investigación en sustentabilidad ' %>
+                   <div class="panel-heading " style="background-color: #E0FFFF">
+                     <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                   </div>
+                   <li><%= preguntum.pregunta %></li>
+                   <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                   <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                   <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                   <%= s.text_field :comentario, placeholder:'Comentario' %>
+                   <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                <% elsif preguntum.subcategoria == 'CU7. Investigación enfocada en sustentabilidad ' %>
+                  <div class="panel-heading " style="background-color: #E0FFFF">
+                    <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                  </div>
+                  <li><%= preguntum.pregunta %></li>
+                  <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                  <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                  <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                  <%= s.text_field :comentario, placeholder:'Comentario' %>
+                  <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                <% elsif preguntum.subcategoria == 'CU8. Transferencia de conocimiento ' %>
+                  <div class="panel-heading " style="background-color: #E0FFFF">
+                    <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                  </div>
+                  <li><%= preguntum.pregunta %></li>
+                  <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                  <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                  <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                  <%= s.text_field :comentario, placeholder:'Comentario' %>
+                  <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+                  <% end %>
+                 <%end%>
+               <% end %>
+             <% end %>
+            <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+        </div>
+    </div>
+
+    <div class="panel panel-default setup-content" id="step-6">
+       <div class="panel-heading" style="background-color: #E0FFFF">
+            <h3 class="panel-title" >Gestión de Campus</h3>
+       </div>
+       <div class="panel-body">
+       </br>
+          <% @pregunta.each do |preguntum| %>
+             <%= form.fields_for :resultados do |s| %>
+               <% if preguntum.categoria == 'Campus' %>
+                  <% if preguntum.subcategoria == 'GC1. Huella Hidríca' %>
+                    <div class="panel-heading " style="background-color: #E0FFFF">
+                      <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                    </div>
+                    <li><%= preguntum.pregunta %></li>
+                    <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                    <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                    <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                    <%= s.text_field :comentario, placeholder:'Comentario' %>
+                    <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                  <% elsif preguntum.subcategoria == 'GC2. Reducción del consumo de agua' %>
+                    <div class="panel-heading " style="background-color: #E0FFFF">
+                      <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                    </div>
+                    <li><%= preguntum.pregunta %></li>
+                    <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                    <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                    <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                    <%= s.text_field :comentario, placeholder:'Comentario' %>
+                    <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                  <% elsif preguntum.subcategoria == 'GC3. Biodiversidad' %>
+                    <div class="panel-heading " style="background-color: #E0FFFF">
+                      <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                    </div>
+                    <li><%= preguntum.pregunta %></li>
+                    <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                    <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                    <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                    <%= s.text_field :comentario, placeholder:'Comentario' %>
+                    <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                 <% elsif preguntum.subcategoria == 'GC4. Manejo sustentable de jardines' %>
+                    <div class="panel-heading " style="background-color: #E0FFFF">
+                      <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                    </div>
+                    <li><%= preguntum.pregunta %></li>
+                    <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                    <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                    <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                    <%= s.text_field :comentario, placeholder:'Comentario' %>
+                    <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                 <% elsif preguntum.subcategoria == 'GC5. Alimentación' %>
+                    <div class="panel-heading " style="background-color: #E0FFFF">
+                         <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                    </div>
+                    <li><%= preguntum.pregunta %></li>
+                    <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                    <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                    <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                    <%= s.text_field :comentario, placeholder:'Comentario' %>
+                    <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                    <% elsif preguntum.subcategoria == 'GC6. Programa de compras sustentables' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                    <% elsif preguntum.subcategoria == 'GC7. Diseño y construcción' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                    <% elsif preguntum.subcategoria == 'GC8. Operación y mantención ' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                    <% elsif preguntum.subcategoria == 'GC9. Consumo de energía' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                        <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                    <% elsif preguntum.subcategoria == 'GC10. Energía renovable' %>
+                      <div class="panel-heading " style="background-color: #E0FFFF">
+                           <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                      </div>
+                      <li><%= preguntum.pregunta %></li>
+                      <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                      <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                      <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                      <%= s.text_field :comentario, placeholder:'Comentario' %>
+                      <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+
+                      <% elsif preguntum.subcategoria == 'GC11. Generación de residuos' %>
+                        <div class="panel-heading " style="background-color: #E0FFFF">
+                          <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                        </div>
+                        <li><%= preguntum.pregunta %></li>
+                        <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                        <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                        <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                        <%= s.text_field :comentario, placeholder:'Comentario' %>
+                        <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                      <% elsif preguntum.subcategoria == 'GC12. Recuperación de residuos' %>
+                        <div class="panel-heading " style="background-color: #E0FFFF">
+                          <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                        </div>
+                        <li><%= preguntum.pregunta %></li>
+                        <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                        <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                        <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                        <%= s.text_field :comentario, placeholder:'Comentario' %>
+                        <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                      <% elsif preguntum.subcategoria == 'GC13. Residuos peligrosos' %>
+                        <div class="panel-heading " style="background-color: #E0FFFF">
+                          <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                        </div>
+                        <li><%= preguntum.pregunta %></li>
+                        <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                        <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                        <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                        <%= s.text_field :comentario, placeholder:'Comentario' %>
+                        <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                      <% elsif preguntum.subcategoria == 'GC14. Participación modal medios de transporte' %>
+                        <div class="panel-heading " style="background-color: #E0FFFF">
+                          <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                        </div>
+                        <li><%= preguntum.pregunta %></li>
+                        <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                        <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                        <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                        <%= s.text_field :comentario, placeholder:'Comentario' %>
+                        <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                      <% elsif preguntum.subcategoria == 'GC15. Plan transporte sustentable' %>
+                        <div class="panel-heading " style="background-color: #E0FFFF">
+                             <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                        </div>
+                        <li><%= preguntum.pregunta %></li>
+                        <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                        <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                        <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                        <%= s.text_field :comentario, placeholder:'Comentario' %>
+                        <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                 <% end %>
+                <%end%>
+              <% end %>
+            <% end %>
+           <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+       </div>
+    </div>
+
+    <div class="panel panel-default setup-content" id="step-7">
+      <div class="panel-heading" style="background-color: #E0FFFF">
+           <h3 class="panel-title" >Responsabilidad Social</h3>
+      </div>
+      <div class="panel-body">
+      </br>
+         <% @pregunta.each do |preguntum| %>
+            <%= form.fields_for :resultados do |s| %>
+              <% if preguntum.categoria == 'Responsabilidad Social' %>
+                 <% if preguntum.subcategoria == 'RS1. Asequibilidad' %>
+                   <div class="panel-heading " style="background-color: #E0FFFF">
+                     <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                   </div>
+                   <li><%= preguntum.pregunta %></li>
+                   <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                   <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                   <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                   <%= s.text_field :comentario, placeholder:'Comentario' %>
+                   <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                 <% elsif preguntum.subcategoria == 'RS2. Política de inclusión' %>
+                   <div class="panel-heading " style="background-color: #E0FFFF">
+                     <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                   </div>
+                   <li><%= preguntum.pregunta %></li>
+                   <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                   <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                   <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                   <%= s.text_field :comentario, placeholder:'Comentario' %>
+                   <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                 <% elsif preguntum.subcategoria == 'RS3. Equidad de género' %>
+                   <div class="panel-heading " style="background-color: #E0FFFF">
+                     <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                   </div>
+                   <li><%= preguntum.pregunta %></li>
+                   <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                   <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                   <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                   <%= s.text_field :comentario, placeholder:'Comentario' %>
+                   <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+                <% elsif preguntum.subcategoria == 'RS4. Colaboración' %>
+                  <div class="panel-heading " style="background-color: #E0FFFF">
+                    <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                  </div>
+                  <li><%= preguntum.pregunta %></li>
+                  <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                  <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                  <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                  <%= s.text_field :comentario, placeholder:'Comentario' %>
+                  <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+              <% elsif preguntum.subcategoria == 'RS5. PArticipación en políticas públicas' %>
+                 <div class="panel-heading " style="background-color: #E0FFFF">
+                   <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                 </div>
+                 <li><%= preguntum.pregunta %></li>
+                 <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                 <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                 <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                 <%= s.text_field :comentario, placeholder:'Comentario' %>
+                 <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+              <% elsif preguntum.subcategoria == 'RS6. Comunidades vecinas' %>
+                 <div class="panel-heading " style="background-color: #E0FFFF">
+                   <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                 </div>
+                 <li><%= preguntum.pregunta %></li>
+                 <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                 <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                 <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                 <%= s.text_field :comentario, placeholder:'Comentario' %>
+                 <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+              <% elsif preguntum.subcategoria == 'RS7. Compensación del personal' %>
+                <div class="panel-heading " style="background-color: #E0FFFF">
+                  <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                </div>
+                <li><%= preguntum.pregunta %></li>
+                <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                <%= s.text_field :comentario, placeholder:'Comentario' %>
+                <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+              <% elsif preguntum.subcategoria == 'RS8. Satisfacción laboral' %>
+                <div class="panel-heading " style="background-color: #E0FFFF">
+                  <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                </div>
+                <li><%= preguntum.pregunta %></li>
+                <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                <%= s.text_field :comentario, placeholder:'Comentario' %>
+                <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+              <% elsif preguntum.subcategoria == 'RS9. Sindicalización' %>
+                <div class="panel-heading " style="background-color: #E0FFFF">
+                  <h3 class="panel-title"><%= preguntum.subcategoria %></h3>
+                </div>
+                <li><%= preguntum.pregunta %></li>
+                <%= s.text_field :respuesta, placeholder:' Respuesta' %>
+                <%= s.text_field :descripcion, placeholder:' Descripción' %>
+                <%= s.text_field :verificacion, placeholder:' Verificación' %>
+                <%= s.text_field :comentario, placeholder:'Comentario' %>
+                <%= s.hidden_field 'pregunta_id',:value => preguntum.id%>
+
+              <% end %>
+             <%end%>
+           <% end %>
+         <% end %>
+        <button class="btn btn-success pull-right" type="submit">Finish!</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+<%end%>
