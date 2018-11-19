@@ -1,5 +1,6 @@
 /*By DjelalEddine@gmail.com*/
 
+
 body, html {
   height: 100%;
   background-image: url('/assets/f2.jpg');
@@ -38,7 +39,8 @@ overflow:hidden;
 
 /* table*/
 #user .panel-table{
-  animation-duration:3s;
+  -webkit-animation-duration:3s;
+          animation-duration:3s;
 }
 
 #user .panel-table .panel-body .table{

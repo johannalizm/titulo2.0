@@ -43,14 +43,16 @@
                     <label class="control-label">Pregunta : </label>
                     <%= form.text_area :pregunta, id: :preguntum_pregunta,  class:'form-control', placeholder:'Ej: Existen instancias de representatividad para el conjunto de estudiantes elegidas de forma democrática. Estas deben representar a la totalidad de los estudiantes de la institución. ' %>
                 </div>
+
                 <div class="form-group">
-                    <label class="control-label">Categoria : </label>
-                    <%= form.select  :categoria, [['Datos Institucionales','Datos Institucionales'],['Gobernanza','Gobernanza'],['Cultura','Cultura'],['Academia','Academia'],['Campus','Campus'],['Responsabilidad Social','Responsabilidad Social']],{include_blank: 'Ingrese Categoria'} , {class: 'form-control'}%>
+                        <label for="control-label">Categoria : </label>
+                        <%= form.collection_select :cat_id, Cat.all, :id, :nombre , {include_blank: ''} , {class: 'form-control'} %>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Sub-Categoria :</label>
-                    <%= form.select  :subcategoria, [['GOB1','GOB1'],['GOB2','GOB2'],['Cultura','cu'],['Academia','ac'],['Campus','gc'],['Responsabilidad Social','rs']],{include_blank: 'Ingrese Categoria'} , {class: 'form-control'}%>
+                        <label for="control-label">SubCategoria :</label>
+                         <%= form.grouped_collection_select :subcat_id, Cat.all,:subcats, :nombre, :id, :nombre , {include_blank: ''} , {class: 'form-control'}%>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label">Tipo Respuesta :</label>
                   <%= form.text_field :tiporespuesta, id: :preguntum_tiporespuesta,  class:'form-control', placeholder:'Ej:' %>

@@ -35,13 +35,12 @@
             <% @pregunta.each do |preguntum| %>
             <tr class="ok">
             <td><%= preguntum.identificador%></td>
-            <td><%= preguntum.pregunta %></td>
-            <td><%= preguntum.categoria %></td>
-            <td><%= preguntum.subcategoria %></td>
+            <td class="control-label col-xs-5"><%= preguntum.pregunta %></td>
+            <td><%= preguntum.subcat.cat.nombre%></td>
+            <td><%= preguntum.subcat.nombre %></td>
             <td align="center">
                <a><%= link_to 'Mostrar Datos ', preguntum, :class => "btn btn-success" %></a>
                <a><%= link_to 'Editar', edit_preguntum_path(preguntum) , :class => "btn btn-warning"%></a>
-               <a><%= link_to 'Eliminar', preguntum, method: :delete, data: { confirm: 'Esta seguro que desea eliminar esta institución?' }, :class => "btn btn-danger" %></a>
              </td>
             </tr>
           <% end %>
@@ -59,5 +58,3 @@
 </div>
 </div>
 </body>
-
-<%= link_to 'New Preguntum', new_preguntum_path %>
