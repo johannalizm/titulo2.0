@@ -5,13 +5,13 @@
 <%= stylesheet_link_tag "preg.css" %>
 <%= javascript_include_tag "pre", "data-turbolinks-track" => true  %>
 
-<%= form_with(model: preguntum, local: true) do |form| %>
-  <% if preguntum.errors.any? %>
+<%= form_with(model: question, local: true) do |form| %>
+  <% if question.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(preguntum.errors.count, "error") %> prohibited this preguntum from being saved:</h2>
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
       <ul>
-      <% preguntum.errors.full_messages.each do |message| %>
+      <% question.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -37,11 +37,11 @@
             <div class="panel-body">
                 <div class="form-group">
                     <label class="control-label">Indicador : </label>
-                    <%= form.text_field :identificador, id: :preguntum_identificador, class:'form-control', placeholder:' Ej: GOB1' %>
+                    <%= form.text_field :indicador, id: :question_indicador, class:'form-control', placeholder:' Ej: GOB1' %>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Pregunta : </label>
-                    <%= form.text_area :pregunta, id: :preguntum_pregunta,  class:'form-control', placeholder:'Ej: Existen instancias de representatividad para el conjunto de estudiantes elegidas de forma democrática. Estas deben representar a la totalidad de los estudiantes de la institución. ' %>
+                    <label class="control-label">pregunta : </label>
+                    <%= form.text_area :pregunta, id: :question_pregunta,  class:'form-control', placeholder:'Ej: Existen instancias de representatividad para el conjunto de estudiantes elegidas de forma democrática. Estas deben representar a la totalidad de los estudiantes de la institución. ' %>
                 </div>
 
                 <div class="form-group">
@@ -54,9 +54,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label">Tipo Respuesta :</label>
-                  <%= form.text_field :tiporespuesta, id: :preguntum_tiporespuesta,  class:'form-control', placeholder:'Ej:' %>
-                </div>
+                   <label class="control-label"> Tipo Respuesta :</label>
+                   <%= form.select :tiporespuesta, [['Si - No','Si - No'],['Alternativa','Alternativa'],['Ingresa Valor Manualmente','Ingresa Valor Manualmente']],{include_blank: ''} , {class: 'form-control'}%>
+               </div>
                 <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
             </div>
 
@@ -64,6 +64,12 @@
 
         <div class="panel panel-primary setup-content" id="step-4">
              <div class="panel-body">
+               <%= form.fields_for :alternativas do |s| %>
+                <%= s.label :nombre %>
+                <%= s.text_field :nombre %>
+                <%= s.label :puntaje%>
+                <%= s.text_field :puntaje%>
+               <% end %>
                  <button class="btn btn-success pull-right" type="submit">Finish!</button>
              </div>
          </div>

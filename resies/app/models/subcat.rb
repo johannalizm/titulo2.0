@@ -1,4 +1,4 @@
 class Subcat < ApplicationRecord
-  has_many :preguntum
+  has_many :questions
   belongs_to :cat
 end

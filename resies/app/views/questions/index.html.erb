@@ -28,33 +28,23 @@
             <th>Pregunta</th>
             <th>Categoria</th>
             <th>Sub-Categoria</th>
+            <th>Tipo Respuesta</th>
             <th><em class="fa fa-cog"></em></th>
           </tr>
          </thead>
          <tbody>
-            <% @pregunta.each do |preguntum| %>
-            <tr class="ok">
-            <td><%= preguntum.identificador%></td>
-            <td class="control-label col-xs-5"><%= preguntum.pregunta %></td>
-            <td><%= preguntum.subcat.cat.nombre%></td>
-            <td><%= preguntum.subcat.nombre %></td>
-            <td align="center">
-               <a><%= link_to 'Mostrar Datos ', preguntum, :class => "btn btn-success" %></a>
-               <a><%= link_to 'Editar', edit_preguntum_path(preguntum) , :class => "btn btn-warning"%></a>
-             </td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div><!-- END id="list" -->
-      </div>
-       </div>
-      </div>
-      </div><!-- END id="thumb" -->
-     </div><!-- END tab-content -->
-    </div>
-  </div><!--END panel-table-->
-</div>
-</div>
-</div>
-</body>
+           <% @questions.each do |question| %>
+             <tr class="ok">
+               <td><%= question.indicador %></td>
+               <td class="control-label col-xs-4"><%= question.pregunta %></td>
+               <td><%= question.subcat.cat.nombre%></td>
+               <td><%= question.subcat.nombre %></td>
+               <td><%= question.tiporespuesta %></td>
+               <td align="center">
+                 <a><%= link_to 'Mostrar Datos ', question, :class => "btn btn-success" %></a>
+                 <a><%= link_to 'Editar', edit_question_path(question) , :class => "btn btn-warning"%></a>
+               </td>
+             </tr>
+           <% end %>
+
+<%= link_to 'New Question', new_question_path %>

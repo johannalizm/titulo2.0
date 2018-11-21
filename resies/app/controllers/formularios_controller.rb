@@ -10,20 +10,20 @@ class FormulariosController < ApplicationController
   # GET /formularios/1
   # GET /formularios/1.json
   def show
-    @pregunta = Preguntum.all
+    @questions = Question.all
   end
 
   # GET /formularios/new
   def new
     @formulario = Formulario.new
     @formulario.resultados.build
-    @pregunta = Preguntum.all
+    @questions = Question.all
     Rails.logger.debug("New method executed")
   end
 
   # GET /formularios/1/edit
   def edit
-    @pregunta = Preguntum.all
+    @questions = Question.all
   end
 
   # POST /formularios
@@ -75,7 +75,7 @@ class FormulariosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def formulario_params
       params.require(:formulario).permit(:nombre_encargado, :telefono, :fecha,
-      :resultados_attributes => [:id, :respuesta, :comentario, :verificacion, :descripcion, :pregunta_id]
+      :resultados_attributes => [:id, :respuesta, :comentario, :verificacion, :descripcion, :question_id, :_destroy]
       )
     end
 end

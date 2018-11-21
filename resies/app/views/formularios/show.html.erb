@@ -17,10 +17,10 @@
 
 <ol>
 
-  <% @pregunta.each do |preguntum| %>
+  <% @questions.each do |question| %>
    <% for resultado in @formulario.resultados %>
-      <% if preguntum.id == resultado.pregunta_id  %>
-        <li><%= preguntum.pregunta %></li>
+   <li><%= question.pregunta %></li>
+      <% if question.id == resultado.question_id  %>
         <td><%= resultado.respuesta %></td></br>
         <td><%= resultado.descripcion %></td></br>
         <td><%= resultado.verificacion %></td></br>

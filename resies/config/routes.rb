@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :questions
   resources :formularios
-  resources :pregunta
+  resources :question
   resources :instituciones
   devise_for :users, controllers: {:registrations => 'user/registrations', :confirmations =>'user/confirmations'}
   root to: 'welcome#index'

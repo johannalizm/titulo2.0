@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181119053608) do
+ActiveRecord::Schema.define(version: 20181120195029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alternativas", force: :cascade do |t|
+    t.string "nombre"
+    t.float "puntaje"
+    t.bigint "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_alternativas_on_question_id"
+  end
 
   create_table "cats", force: :cascade do |t|
     t.string "nombre"
@@ -53,16 +62,14 @@ ActiveRecord::Schema.define(version: 20181119053608) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pregunta", force: :cascade do |t|
-    t.string "identificador"
+  create_table "questions", force: :cascade do |t|
+    t.string "indicador"
     t.string "pregunta"
-    t.string "categoria"
-    t.string "subcategoria"
     t.string "tiporespuesta"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "subcat_id"
-    t.index ["subcat_id"], name: "index_pregunta_on_subcat_id"
+    t.index ["subcat_id"], name: "index_questions_on_subcat_id"
   end
 
   create_table "regions", force: :cascade do |t|
@@ -81,9 +88,9 @@ ActiveRecord::Schema.define(version: 20181119053608) do
     t.bigint "formulario_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "pregunta_id"
+    t.bigint "question_id"
     t.index ["formulario_id"], name: "index_resultados_on_formulario_id"
-    t.index ["pregunta_id"], name: "index_resultados_on_pregunta_id"
+    t.index ["question_id"], name: "index_resultados_on_question_id"
   end
 
   create_table "subcats", force: :cascade do |t|
@@ -123,12 +130,13 @@ ActiveRecord::Schema.define(version: 20181119053608) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "alternativas", "questions"
   add_foreign_key "instituciones", "regions"
   add_foreign_key "instituciones", "tipoinstituciones"
   add_foreign_key "instituciones", "tiporelaciones"
-  add_foreign_key "pregunta", "subcats"
+  add_foreign_key "questions", "subcats"
   add_foreign_key "regions", "paises"
   add_foreign_key "resultados", "formularios"
-  add_foreign_key "resultados", "pregunta", column: "pregunta_id"
+  add_foreign_key "resultados", "questions"
   add_foreign_key "subcats", "cats"
 end

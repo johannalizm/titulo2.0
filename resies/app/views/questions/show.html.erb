@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Indicador:</strong>
+  <%= @question.indicador %>
+</p>
+
+<p>
+  <strong>pregunta:</strong>
+  <%= @question.pregunta %>
+</p>
+
+<p>
+  <strong>Tiporespuesta:</strong>
+  <%= @question.tiporespuesta %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
