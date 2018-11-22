@@ -21,9 +21,10 @@ class FormulariosController < ApplicationController
     Rails.logger.debug("New method executed")
   end
 
-  # GET /formularios/1/edit
+  #GET /formularios/1/edit
   def edit
     @questions = Question.all
+    @resultados = Resultado.where(formulario_id: params[:id])
   end
 
   # POST /formularios
@@ -45,6 +46,7 @@ class FormulariosController < ApplicationController
   # PATCH/PUT /formularios/1
   # PATCH/PUT /formularios/1.json
   def update
+
     respond_to do |format|
       if @formulario.update(formulario_params)
         format.html { redirect_to @formulario, notice: 'Formulario was successfully updated.' }

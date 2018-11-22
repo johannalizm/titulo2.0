@@ -35,11 +35,11 @@
          <tbody>
            <% @questions.each do |question| %>
              <tr class="ok">
-               <td><%= question.indicador %></td>
-               <td class="control-label col-xs-4"><%= question.pregunta %></td>
-               <td><%= question.subcat.cat.nombre%></td>
-               <td><%= question.subcat.nombre %></td>
-               <td><%= question.tiporespuesta %></td>
+               <td class="control-label col-xs-1"><%= question.indicador %></td>
+               <td class="control-label col-xs-3"><%= question.pregunta %></td>
+               <td class="control-label col-xs-2"><%= question.subcat.cat.nombre%></td>
+               <td class="control-label col-xs-2"><%= question.subcat.nombre %></td>
+               <td class="control-label col-xs-1"><%= question.tiporespuesta %></td>
                <td align="center">
                  <a><%= link_to 'Mostrar Datos ', question, :class => "btn btn-success" %></a>
                  <a><%= link_to 'Editar', edit_question_path(question) , :class => "btn btn-warning"%></a>

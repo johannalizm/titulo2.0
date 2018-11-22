@@ -15,13 +15,14 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
-    @question.alternativas.build
+     @question.alternativas.build
     Rails.logger.debug("New method executed")
 
   end
 
   # GET /questions/1/edit
   def edit
+    @alternativas= Alternativa.all
   end
 
   # POST /questions

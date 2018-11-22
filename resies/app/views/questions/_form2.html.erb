@@ -5,7 +5,7 @@
 <%= stylesheet_link_tag "preg.css" %>
 <%= javascript_include_tag "pre", "data-turbolinks-track" => true  %>
 
-<%= form_with(model: question, local: true) do |f| %>
+<%= form_with(model: question, local: true) do |form| %>
   <% if question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -37,25 +37,25 @@
             <div class="panel-body">
                 <div class="form-group">
                     <label class="control-label">Indicador : </label>
-                    <%= f.text_field :indicador, id: :question_indicador, class:'form-control', placeholder:' Ej: GOB1' %>
+                    <%= form.text_field :indicador, id: :question_indicador, class:'form-control', placeholder:' Ej: GOB1' %>
                 </div>
                 <div class="form-group">
                     <label class="control-label">pregunta : </label>
-                    <%= f.text_area :pregunta, id: :question_pregunta,  class:'form-control', placeholder:'Ej: Existen instancias de representatividad para el conjunto de estudiantes elegidas de forma democrática. Estas deben representar a la totalidad de los estudiantes de la institución. ' %>
+                    <%= form.text_area :pregunta, id: :question_pregunta,  class:'form-control', placeholder:'Ej: Existen instancias de representatividad para el conjunto de estudiantes elegidas de forma democrática. Estas deben representar a la totalidad de los estudiantes de la institución. ' %>
                 </div>
 
                 <div class="form-group">
                         <label for="control-label">Categoria : </label>
-                        <%= f.collection_select :cat_id, Cat.all, :id, :nombre , {include_blank: ''} , {class: 'form-control'} %>
+                        <%= form.collection_select :cat_id, Cat.all, :id, :nombre , {include_blank: ''} , {class: 'form-control'} %>
                 </div>
                 <div class="form-group">
                         <label for="control-label">SubCategoria :</label>
-                         <%= f.grouped_collection_select :subcat_id, Cat.all,:subcats, :nombre, :id, :nombre , {include_blank: ''} , {class: 'form-control'}%>
+                         <%= form.grouped_collection_select :subcat_id, Cat.all,:subcats, :nombre, :id, :nombre , {include_blank: ''} , {class: 'form-control'}%>
                 </div>
 
                 <div class="form-group">
                    <label class="control-label"> Tipo Respuesta :</label>
-                   <%= f.select :tiporespuesta, [['Si - No','Si - No'],['Alternativa','Alternativa'],['Ingresa Valor Manualmente','Ingresa Valor Manualmente']],{include_blank: ''} , {class: 'form-control'}%>
+                   <%= form.select :tiporespuesta, [['Si - No','Si - No'],['Alternativa','Alternativa'],['Ingresa Valor Manualmente','Ingresa Valor Manualmente']],{include_blank: ''} , {class: 'form-control'}%>
                </div>
                 <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
             </div>
@@ -67,14 +67,29 @@
                     <h3 class="panel-title"> Alternativas</h3>
                </div>
                 <div class="panel-body">
+                  <div class="panel-heading" style="background-color: #E0FFFF">
+                       <h3 class="panel-title">Si - No</h3>
+                  </div>
                   </br> </br>
-                  <%= f.fields_for :alternativas do |alternativa| %>
 
-                    <%= render 'alternativa_fields', f: alternativa %>
+                  <%= form.fields_for :alternativas do |s| %>
+                    <label class="control-label "> Nombre : </label>
+                      <%= s.text_field :nombre,  class:'control-label', placeholder:'Ej: Si ' %>
+                    <label class="control-label "> Puntaje : </label>
+                    <%= s.text_field :puntaje,  class:'control-label', placeholder:'Ej: 0.5 ' %>
 
-                  <%end%>
-                  
-                    <%= link_to_add_fields "Agregar Alternativa", f, :alternativas %>
+
+                  </br> </br>
+
+
+
+
+                <%end%>
+                </br></br></br>
+
+
+                  </br> </br>
+
                  <button class="btn btn-success pull-right" type="submit">Finish!</button>
              </div>
          </div>

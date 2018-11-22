@@ -19,12 +19,15 @@
 
   <% @questions.each do |question| %>
    <% for resultado in @formulario.resultados %>
-   <li><%= question.pregunta %></li>
       <% if question.id == resultado.question_id  %>
+       <li><%= question.pregunta %></li>
         <td><%= resultado.respuesta %></td></br>
         <td><%= resultado.descripcion %></td></br>
         <td><%= resultado.verificacion %></td></br>
         <td><%= resultado.comentario %></td>
+        <td><%= resultado.question_id %> </td>
+        <td><%= resultado.id %></td>
+        <td><%= resultado.formulario_id %></td>
         <% end %>
     <% end %>
   <% end %>
