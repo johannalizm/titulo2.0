@@ -5,6 +5,7 @@
 <%= stylesheet_link_tag "preg.css" %>
 <%= javascript_include_tag "pre", "data-turbolinks-track" => true  %>
 
+
 <%= form_with(model: question, local: true) do |f| %>
   <% if question.errors.any? %>
     <div id="error_explanation">
@@ -40,7 +41,7 @@
                     <%= f.text_field :indicador, id: :question_indicador, class:'form-control', placeholder:' Ej: GOB1' %>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">pregunta : </label>
+                    <label class="control-label">Pregunta : </label>
                     <%= f.text_area :pregunta, id: :question_pregunta,  class:'form-control', placeholder:'Ej: Existen instancias de representatividad para el conjunto de estudiantes elegidas de forma democrática. Estas deben representar a la totalidad de los estudiantes de la institución. ' %>
                 </div>
 
@@ -75,7 +76,7 @@
                   <%end%>
 
                     <%= link_to_add_fields "Agregar Alternativa", f, :alternativas %>
-                  </br></br></br>  
+                  </br></br></br>
                  <button class="btn btn-success pull-right" type="submit">Finish!</button>
              </div>
          </div>
