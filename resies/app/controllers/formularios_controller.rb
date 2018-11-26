@@ -25,6 +25,7 @@ class FormulariosController < ApplicationController
   def edit
     @questions = Question.all
     @resultados = Resultado.where(formulario_id: params[:id])
+    @number =0
   end
 
   # POST /formularios
