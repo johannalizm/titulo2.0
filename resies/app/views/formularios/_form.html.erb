@@ -2,6 +2,10 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 <%= stylesheet_link_tag "preg.css" %>
 <%= javascript_include_tag "pre", "data-turbolinks-track" => true  %>
 
@@ -75,45 +79,153 @@
           <div class="panel-heading" style="background-color: #E0FFFF">
                <h3 class="panel-title" >Datos Institucionales</h3>
           </div>
-          <div class="panel-body">
-          </br>
-             <% @questions.each do |question| %>
-                <%= form.fields_for :resultados do |s| %>
-                  <% if question.subcat.cat.nombre == 'Datos Institucionales' %>
-                     <% if question.subcat.nombre == 'Población' %>
-                       <li><%= question.pregunta %></li>
-                       <%= s.text_field :respuesta, placeholder:' Respuesta' %>
-                       <%= s.text_field :descripcion, placeholder:' Descripción' %>
-                       <%= s.text_field :verificacion, placeholder:' Verificación' %>
-                       <%= s.text_field :comentario, placeholder:'Comentario' %>
-                       <%= s.hidden_field 'question_id',:value => question.id%>
-
-                     <% elsif question.subcat.nombre == 'Instalaciones' %>
-
-                       <li><%= question.pregunta %></li>
-                       <%= s.text_field :respuesta, placeholder:' Respuesta' %>
-                       <%= s.text_field :descripcion, placeholder:' Descripción' %>
-                       <%= s.text_field :verificacion, placeholder:' Verificación' %>
-                       <%= s.text_field :comentario, placeholder:'Comentario' %>
-                       <%= s.hidden_field 'question_id',:value => question.id%>
-
-                     <% elsif question.subcat.nombre == 'Año Base' %>
-
-                       <li><%= question.pregunta %></li>
-                       <%= s.text_field :respuesta, placeholder:' Respuesta' %>
-                       <%= s.text_field :descripcion, placeholder:' Descripción' %>
-                       <%= s.text_field :verificacion, placeholder:' Verificación' %>
-                       <%= s.text_field :comentario, placeholder:'Comentario' %>
-                       <%= s.hidden_field 'question_id',:value => question.id%>
-                    <% end %>
-                    </br>
-                   <%end%>
-                   </br>
-                 <% end %>
-                 </br>
-               <% end %>
-              <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+      <div class="panel-body">
+          <div class="col-md-12 text-center">
+            <div class="panel-heading" style="background-color: #DDA0DD">
+                 <h3 class="panel-title" >Población </h3>
+            </div></br>
+          <table class="table text-center" style="font-size: 11pt">
+                <tr style="background-color: 	#E0FFFF">
+                    <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Sub Categoria</th>
+                    <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Indicador</th>
+                    <th class="border-0 text-uppercase small font-weight-bold col-xs-3 text-center">Pregunta</th>
+                    <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Respuesta</th>
+                    <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Descripción</th>
+                    <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Verificación</th>
+                    <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Comentario</th>
+                </tr>
+          </table>
           </div>
+          <% @questions.each do |question| %>
+                <%= form.fields_for :resultados do |s| %>
+                  <% if question.subcat.nombre == 'Población'%>
+                     <% valor = question.id%>
+                     <div class="col-md-12 text-justify">
+                       <table class="table text-center" style="font-size: 10pt">
+                     <tr>
+                     <td class="col-xs-1" ><%= question.subcat.nombre %></td>
+                     <td class="col-xs-1" ><%= question.indicador%></td>
+                     <td class= "col-xs-3"><%= question.pregunta %></td>
+                     <% if question.tiporespuesta == 'Si - No' || question.tiporespuesta == 'Alternativa' %>
+                        <td><%= s.collection_select :respuesta,   Alternativa.where(question_id: valor) , :puntaje, :nombre ,{include_blank: ''} , {class: 'form-control'} %></div></td>
+                        <td><%= s.text_area :descripcion, placeholder:' Descripción'  %></td>
+                        <td><%= s.text_area :verificacion, placeholder:' Verificación' %></td>
+                        <td><%= s.text_area :comentario, placeholder:'Comentario' %></td>
+                        <%= s.hidden_field 'question_id',:value => question.id%>
+                     <% elsif question.tiporespuesta == 'Ingresa Valor Manualmente' %>
+                        <td class="col-xs-2"><%= s.text_area :respuesta,  placeholder:' Respuesta', class:'form-control' %></td>
+                        <td class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción' , class:'form-control'%></td>
+                        <td class="col-xs-1"><%= s.text_area :verificacion, placeholder:' Verificación', class:'form-control'%></td>
+                        <td class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' ,  class:'form-control' %></td>
+                        <%= s.hidden_field 'question_id',:value => question.id%>
+                      <%end%>
+                      </tr>
+                    </table>
+                  </div>
+                  <% elsif question.subcat.nombre != 'Población'%>
+                      <%  break %>
+                  <%end%>
+                <%end%>
+          <%end%>
+
+          <div class="col-md-12 text-center">
+              <div class="panel-heading" style="background-color: #DDA0DD">
+                 <h3 class="panel-title" >Instalaciones</h3>
+              </div></br>
+              <table class="table text-center" style="font-size: 11pt">
+                <tr style="background-color: 	#E0FFFF">
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Sub Categoria</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Indicador</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-3 text-center">Pregunta</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Respuesta</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Descripción</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Verificación</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Comentario</th>
+                </tr>
+              </table>
+          </div>
+          <% @questions.each do |question| %>
+            <%= form.fields_for :resultados do |s| %>
+                <% if question.subcat.nombre != 'Instalaciones'%>
+                    <%break%>
+                <% elsif question.subcat.nombre == 'Instalaciones'%>
+                    <% valor = question.id%>
+                    <div class="col-md-12 text-justify">
+                    <table class="table text-center" style="font-size: 10pt">
+                    <tr>
+                        <td class="col-xs-1" ><%= question.subcat.nombre %></td>
+                        <td class="col-xs-1" ><%= question.indicador%></td>
+                        <td class= "col-xs-3"><%= question.pregunta %></td>
+                        <% if question.tiporespuesta == 'Si - No' || question.tiporespuesta == 'Alternativa' %>
+                          <td><%= s.collection_select :respuesta,   Alternativa.where(question_id: valor) , :puntaje, :nombre ,{include_blank: ''} , {class: 'form-control'} %></div></td>
+                          <td><%= s.text_area :descripcion, placeholder:' Descripción'  %></td>
+                          <td><%= s.text_area :verificacion, placeholder:' Verificación' %></td>
+                          <td><%= s.text_area :comentario, placeholder:'Comentario' %></td>
+                          <%= s.hidden_field 'question_id',:value => question.id%>
+                        <% elsif question.tiporespuesta == 'Ingresa Valor Manualmente' %>
+                          <td class="col-xs-2"><%= s.text_area :respuesta,  placeholder:' Respuesta', class:'form-control' %></td>
+                          <td class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción' , class:'form-control'%></td>
+                          <td class="col-xs-1"><%= s.text_area :verificacion, placeholder:' Verificación', class:'form-control'%></td>
+                          <td class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' ,  class:'form-control' %></td>
+                          <%= s.hidden_field 'question_id',:value => question.id%>
+                        <%end%>
+                      </tr>
+                    </table>
+                  </div>
+                <%end%>
+            <%end%>
+          <%end%>
+
+          <div class="col-md-12 text-center">
+              <div class="panel-heading" style="background-color: #DDA0DD">
+                 <h3 class="panel-title" >Año Base</h3>
+              </div></br>
+              <table class="table text-center" style="font-size: 11pt">
+                <tr style="background-color: 	#E0FFFF">
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Sub Categoria</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Indicador</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-3 text-center">Pregunta</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Respuesta</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Descripción</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Verificación</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Comentario</th>
+                </tr>
+              </table>
+          </div>
+          <% @questions.each do |question| %>
+            <%= form.fields_for :resultados do |s| %>
+                <% if question.subcat.nombre != 'Año Base'%>
+                    <%break%>
+                <% elsif question.subcat.nombre == 'Año Base'%>
+                    <% valor = question.id%>
+                    <div class="col-md-12 text-justify">
+                    <table class="table text-center" style="font-size: 10pt">
+                    <tr>
+                        <td class="col-xs-1" ><%= question.subcat.nombre %></td>
+                        <td class="col-xs-1" ><%= question.indicador%></td>
+                        <td class= "col-xs-3"><%= question.pregunta %></td>
+                        <% if question.tiporespuesta == 'Si - No' || question.tiporespuesta == 'Alternativa' %>
+                          <td><%= s.collection_select :respuesta,   Alternativa.where(question_id: valor) , :puntaje, :nombre ,{include_blank: ''} , {class: 'form-control'} %></div></td>
+                          <td><%= s.text_area :descripcion, placeholder:' Descripción'  %></td>
+                          <td><%= s.text_area :verificacion, placeholder:' Verificación' %></td>
+                          <td><%= s.text_area :comentario, placeholder:'Comentario' %></td>
+                          <%= s.hidden_field 'question_id',:value => question.id%>
+                        <% elsif question.tiporespuesta == 'Ingresa Valor Manualmente' %>
+                          <td class="col-xs-2"><%= s.text_area :respuesta,  placeholder:' Respuesta', class:'form-control' %></td>
+                          <td class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción' , class:'form-control'%></td>
+                          <td class="col-xs-1"><%= s.text_area :verificacion, placeholder:' Verificación', class:'form-control'%></td>
+                          <td class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' ,  class:'form-control' %></td>
+                          <%= s.hidden_field 'question_id',:value => question.id%>
+                        <%end%>
+                      </tr>
+                    </table>
+                  </div>
+                <%end%>
+            <%end%>
+          <%end%>
+
+              <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+      </div>
     </div>
 
     <div class="panel panel-default setup-content" id="step-3">

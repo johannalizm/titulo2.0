@@ -17,7 +17,8 @@ class FormulariosController < ApplicationController
   def new
     @formulario = Formulario.new
     @formulario.resultados.build
-    @questions = Question.all
+    @questions = Question.order("indicador")
+    @alternativas = Alternativa.all
     Rails.logger.debug("New method executed")
   end
 

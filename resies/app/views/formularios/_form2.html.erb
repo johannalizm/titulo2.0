@@ -18,7 +18,6 @@
     </div>
   <% end %>
 
-
 <div class="container" style="padding-top:30px;">
   <div class="stepwizard">
      <div class="stepwizard-row setup-panel">
@@ -53,7 +52,6 @@
      </div>
   </div>
 
-
     <div class="panel panel-default setup-content" id="step-1">
             <div class="panel-heading" style="background-color: #E0FFFF">
                  <h3 class="panel-title">Datos Encargados</h3>
@@ -83,27 +81,111 @@
           </br>
 
           <% @questions.each do |question| %>
-           <% for resultado in @formulario.resultados %>
-              <% if question.id == resultado.question_id  %>
-              <li><%= question.pregunta %></li>
-              <%= form.fields_for :resultados do |s| %>
-            
-              <%= s.text_field :respuesta, placeholder:' Respuesta' %>
-              <%= s.text_field :descripcion, placeholder:' Descripción' %>
-              <%= s.text_field :verificacion, placeholder:' Verificación' %>
-              <%= s.text_field :comentario, placeholder:'Comentario' %>
-              
-            <% end %>
-          <% end %>
-          <%end%>
-          <%end%>
+               <%= form.fields_for :resultados do |s| %>
+                  <% if question.subcat.cat.nombre == 'Datos Institucionales' %>
+                     <% if question.subcat.nombre == 'Población' %>
+                       <h5 class="col-xs-3"><%= question.pregunta %></h5>
+                       <% valor = question.id%>
+                       <% if question.tiporespuesta == 'Si - No' || question.tiporespuesta == 'Alternativa' %>
+                        <div class="col-xs-2"><%= s.collection_select :respuesta,   Alternativa.where(question_id: valor) , :puntaje, :nombre ,{include_blank: ''} , {class: 'form-control'} %></div>
+                        <div class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción'  %></div>
+                        <div class="col-xs-2"><%= s.text_area :verificacion, placeholder:' Verificación' %></div>
+                        <div class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' %></div>
+                        <%= s.hidden_field 'question_id',:value => question.id%>
+                        <% elsif question.tiporespuesta == 'Ingresa Valor Manualmente' %>
+                        <div class="col-xs-2"><%= s.text_area :respuesta,  placeholder:' Respuesta' %></div>
+                        <div class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción'  %></div>
+                        <div class="col-xs-2"><%= s.text_area :verificacion, placeholder:' Verificación' %></div>
+                        <div class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' %></div>
+                        <%= s.hidden_field 'question_id',:value => question.id%>
+                      <%end%>
+                    <% elsif question.subcat.nombre == 'Instalaciones' %>
+                        <h5 class="col-xs-4"><%= question.pregunta %></h5>
+                        <% valor = question.id%>
+                        <% if question.tiporespuesta == 'Si - No' || question.tiporespuesta == 'Alternativa' %>
+                            <div class="col-xs-2"><%= s.collection_select :respuesta,   Alternativa.where(question_id: valor) , :puntaje, :nombre ,{include_blank: ''} , {class: 'form-control'} %></div>
+                            <div class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción'  %></div>
+                            <div class="col-xs-2"><%= s.text_area :verificacion, placeholder:' Verificación' %></div>
+                            <div class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' %></div>
+                            <%= s.hidden_field 'question_id',:value => question.id%>
+                         <% elsif question.tiporespuesta == 'Ingresa Valor Manualmente' %>
+                            <div class="col-xs-2"><%= s.text_area :respuesta,  placeholder:' Respuesta' %></div>
+                            <div class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción'  %></div>
+                            <div class="col-xs-2"><%= s.text_area :verificacion, placeholder:' Verificación' %></div>
+                            <div class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' %></div>
+                            <%= s.hidden_field 'question_id',:value => question.id%>
+                          <%end%>
+                    <% elsif question.subcat.nombre == 'Año Base' %>
+                         <h5 class="col-xs-4"><%= question.pregunta %></h5>
+                         <% valor = question.id%>
+                         <% if question.tiporespuesta == 'Si - No' || question.tiporespuesta == 'Alternativa' %>
+                            <div class="col-xs-2"><%= s.collection_select :respuesta,   Alternativa.where(question_id: valor) , :puntaje, :nombre ,{include_blank: ''} , {class: 'form-control'} %></div>
+                            <div class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción'  %></div>
+                            <div class="col-xs-2"><%= s.text_area :verificacion, placeholder:' Verificación' %></div>
+                            <div class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' %></div>
+                            <%= s.hidden_field 'question_id',:value => question.id%>
+                          <% elsif question.tiporespuesta == 'Ingresa Valor Manualmente' %>
+                             <div class="col-xs-2"><%= s.text_area :respuesta,  placeholder:' Respuesta' %></div>
+                             <div class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción'  %></div>
+                             <div class="col-xs-2"><%= s.text_area :verificacion, placeholder:' Verificación' %></div>
+                             <div class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' %></div>
+                             <%= s.hidden_field 'question_id',:value => question.id%>
+                          <%end%></br>
+                    <%end%></br>
+                    <%end%>
+                    <%end%>
+                    <%end%>
+
               <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
           </div>
     </div>
 
+    <div class="panel panel-default setup-content" id="step-3">
+       <div class="panel-heading" style="background-color: #E0FFFF">
+          <h3 class="panel-title" >Gobernanza</h3>
+       </div>
+       <div class="panel-body">
+               <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+           </div>
+    </div>
 
+    <div class="panel panel-default setup-content" id="step-4">
+         <div class="panel-heading" style="background-color: #E0FFFF">
+              <h3 class="panel-title" >Cultura</h3>
+         </div>
+         <div class="panel-body">
+             <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+         </div>
+    </div>
+
+    <div class="panel panel-default setup-content" id="step-5">
+        <div class="panel-heading" style="background-color: #E0FFFF">
+             <h3 class="panel-title" >Academia</h3>
+        </div>
+        <div class="panel-body">
+            <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+        </div>
+    </div>
+
+    <div class="panel panel-default setup-content" id="step-6">
+       <div class="panel-heading" style="background-color: #E0FFFF">
+            <h3 class="panel-title" >Gestión de Campus</h3>
+       </div>
+       <div class="panel-body">
+
+           <button class="btn btn-success  btn-lg nextBtn pull-right" type="button">Next</button>
+       </div>
+    </div>
+
+    <div class="panel panel-default setup-content" id="step-7">
+      <div class="panel-heading" style="background-color: #E0FFFF">
+           <h3 class="panel-title" >Responsabilidad Social</h3>
+      </div>
+  <div class="panel-body">
+        <button class="btn btn-success pull-right" type="submit">Finish!</button>
+      </div>
+    </div>
 
   </form>
 </div>
-
 <%end%>
