@@ -86,12 +86,11 @@
             </div></br>
           <table class="table text-center" style="font-size: 11pt">
                 <tr style="background-color: 	#E0FFFF">
-                    <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Sub Categoria</th>
                     <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Indicador</th>
                     <th class="border-0 text-uppercase small font-weight-bold col-xs-3 text-center">Pregunta</th>
                     <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Respuesta</th>
                     <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Descripción</th>
-                    <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Verificación</th>
+                    <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Verificación</th>
                     <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Comentario</th>
                 </tr>
           </table>
@@ -103,7 +102,6 @@
                      <div class="col-md-12 text-justify">
                        <table class="table text-center" style="font-size: 10pt">
                      <tr>
-                     <td class="col-xs-1" ><%= question.subcat.nombre %></td>
                      <td class="col-xs-1" ><%= question.indicador%></td>
                      <td class= "col-xs-3"><%= question.pregunta %></td>
                      <% if question.tiporespuesta == 'Si - No' || question.tiporespuesta == 'Alternativa' %>
@@ -115,7 +113,7 @@
                      <% elsif question.tiporespuesta == 'Ingresa Valor Manualmente' %>
                         <td class="col-xs-2"><%= s.text_area :respuesta,  placeholder:' Respuesta', class:'form-control' %></td>
                         <td class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción' , class:'form-control'%></td>
-                        <td class="col-xs-1"><%= s.text_area :verificacion, placeholder:' Verificación', class:'form-control'%></td>
+                        <td class="col-xs-2"><%= s.text_area :verificacion, placeholder:' Verificación', class:'form-control'%></td>
                         <td class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' ,  class:'form-control' %></td>
                         <%= s.hidden_field 'question_id',:value => question.id%>
                       <%end%>
@@ -134,12 +132,11 @@
               </div></br>
               <table class="table text-center" style="font-size: 11pt">
                 <tr style="background-color: 	#E0FFFF">
-                  <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Sub Categoria</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Indicador</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-3 text-center">Pregunta</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Respuesta</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Descripción</th>
-                  <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Verificación</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Verificación</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Comentario</th>
                 </tr>
               </table>
@@ -153,7 +150,6 @@
                     <div class="col-md-12 text-justify">
                     <table class="table text-center" style="font-size: 10pt">
                     <tr>
-                        <td class="col-xs-1" ><%= question.subcat.nombre %></td>
                         <td class="col-xs-1" ><%= question.indicador%></td>
                         <td class= "col-xs-3"><%= question.pregunta %></td>
                         <% if question.tiporespuesta == 'Si - No' || question.tiporespuesta == 'Alternativa' %>
@@ -165,7 +161,7 @@
                         <% elsif question.tiporespuesta == 'Ingresa Valor Manualmente' %>
                           <td class="col-xs-2"><%= s.text_area :respuesta,  placeholder:' Respuesta', class:'form-control' %></td>
                           <td class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción' , class:'form-control'%></td>
-                          <td class="col-xs-1"><%= s.text_area :verificacion, placeholder:' Verificación', class:'form-control'%></td>
+                          <td class="col-xs-2"><%= s.text_area :verificacion, placeholder:' Verificación', class:'form-control'%></td>
                           <td class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' ,  class:'form-control' %></td>
                           <%= s.hidden_field 'question_id',:value => question.id%>
                         <%end%>
@@ -182,12 +178,11 @@
               </div></br>
               <table class="table text-center" style="font-size: 11pt">
                 <tr style="background-color: 	#E0FFFF">
-                  <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Sub Categoria</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Indicador</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-3 text-center">Pregunta</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Respuesta</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Descripción</th>
-                  <th class="border-0 text-uppercase small font-weight-bold col-xs-1 text-center">Verificación</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Verificación</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Comentario</th>
                 </tr>
               </table>
@@ -201,7 +196,6 @@
                     <div class="col-md-12 text-justify">
                     <table class="table text-center" style="font-size: 10pt">
                     <tr>
-                        <td class="col-xs-1" ><%= question.subcat.nombre %></td>
                         <td class="col-xs-1" ><%= question.indicador%></td>
                         <td class= "col-xs-3"><%= question.pregunta %></td>
                         <% if question.tiporespuesta == 'Si - No' || question.tiporespuesta == 'Alternativa' %>
@@ -213,7 +207,7 @@
                         <% elsif question.tiporespuesta == 'Ingresa Valor Manualmente' %>
                           <td class="col-xs-2"><%= s.text_area :respuesta,  placeholder:' Respuesta', class:'form-control' %></td>
                           <td class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción' , class:'form-control'%></td>
-                          <td class="col-xs-1"><%= s.text_area :verificacion, placeholder:' Verificación', class:'form-control'%></td>
+                          <td class="col-xs-2"><%= s.text_area :verificacion, placeholder:' Verificación', class:'form-control'%></td>
                           <td class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' ,  class:'form-control' %></td>
                           <%= s.hidden_field 'question_id',:value => question.id%>
                         <%end%>
