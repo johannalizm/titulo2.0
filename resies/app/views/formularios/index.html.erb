@@ -15,7 +15,7 @@
   <div class="panel panel-table animated slideInDown" style="background-color: #E0FFFF" >
    <div class="panel-heading " style="padding:10px;">
      <div class="col col-xs-8 text-center">
-            <p class="panel-title" style="font-size: 50pt" >Instituciones Adscritas</p>
+            <p class="panel-title" style="font-size: 50pt" >Encuestas</p>
         </div>
     </div>
    <div class="panel-body">
@@ -27,7 +27,6 @@
            <th>Nombre encargado</th>
            <th>Telefono</th>
            <th>Fecha</th>
-           <th colspan="3"></th>
             <th><em class="fa fa-cog"></em></th>
           </tr>
          </thead>
@@ -43,19 +42,5 @@
                  <a><%= link_to 'Eliminar', formulario, method: :delete, data: { confirm: 'Esta seguro que desea eliminar esta institución?' }, :class => "btn btn-danger"  %></a>
              </tr>
            <% end %>
-          </tbody>
-        </table>
-      </div><!-- END id="list" -->
-      </div>
-       </div>
-      </div>
-      </div><!-- END id="thumb" -->
-     </div><!-- END tab-content -->
-    </div>
-  </div><!--END panel-table-->
-</div>
-</div>
-</div>
-</body>
-
-<%= link_to 'New Formulario', new_formulario_path %>
+         </br></br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+         <span class="	glyphicon glyphicon-edit" style="font-size: 20pt"><%= link_to 'Nueva Encuesta', new_formulario_path , class:'btn' %></span>
