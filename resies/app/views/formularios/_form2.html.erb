@@ -82,8 +82,7 @@
 
           <% @questions.each do |question| %>
                <%= form.fields_for :resultados do |s| %>
-                  <% if question.subcat.cat.nombre == 'Datos Institucionales' %>
-                     <% if question.subcat.nombre == 'Población' %>
+                     <% if s.question.subcat.nombre == 'Población' %>
                        <h5 class="col-xs-3"><%= question.pregunta %></h5>
                        <% valor = question.id%>
                        <% if question.tiporespuesta == 'Si - No' || question.tiporespuesta == 'Alternativa' %>

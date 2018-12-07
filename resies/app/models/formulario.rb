@@ -3,5 +3,4 @@ class Formulario < ApplicationRecord
   accepts_nested_attributes_for :resultados,  allow_destroy: true
 
 
-  
 end
