@@ -37,9 +37,10 @@
                <td><%= formulario.telefono %></td>
                <td><%= formulario.fecha %></td>
                <td align="center">
-                 <a><%= link_to 'Mostrar Datos ', formulario, :class => "btn btn-success" %></a>
+
                  <a><%= link_to 'Editar', edit_formulario_path(formulario) , :class => "btn btn-warning" %></a>
                  <a><%= link_to 'Eliminar', formulario, method: :delete, data: { confirm: 'Esta seguro que desea eliminar esta institución?' }, :class => "btn btn-danger"  %></a>
+               <a><%= link_to 'Mostrar Datos ', edit_historium_path(formulario.id), :class => "btn btn-success" %></a>
              </tr>
            <% end %>
          </br></br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;

@@ -37,8 +37,13 @@ class FormulariosController < ApplicationController
 
     respond_to do |format|
       if @formulario.save
-        format.html { redirect_to @formulario, notice: 'Formulario was successfully created.' }
-        format.json { render :show, status: :created, location: @formulario }
+
+        @historium = Historium.new
+        @historium.id = @formulario.id
+        @historium.save
+
+        format.html { redirect_to @historium, notice: 'Formulario was successfully created.' }
+        format.json { render :edit, status: :created, location: @historium }
       else
         format.html { render :new }
         format.json { render json: @formulario.errors, status: :unprocessable_entity }
@@ -70,6 +75,8 @@ class FormulariosController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,4 +1,15 @@
-<p id="notice"><%= notice %></p>
+<%= form_with(model: historium, local: true) do |form| %>
+  <% if historium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(historium.errors.count, "error") %> prohibited this historium from being saved:</h2>
+
+      <ul>
+      <% historium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -12,13 +23,22 @@
 <% gob4= 0.0 %>
 <% gob5= 0.0 %>
 <% gob6= 0.0 %>
-
+<% suma = 0.0%>
+<% total = 0.0 %>
+<% resto =0.0 %>
 <%igob3=0.0%>
+<%igob5=0.0%>
+<%igob6=0.0%>
+<%igob7=0.0%>
+<%di28=0.0%>
+<%di29=0.0%>
+<%di281=0.0%>
+<%di291=0.0%>
+<%puntaje = 0.0 %>
+<%resta= 0.0 %>
 
-  <% @questions.each do |question| %>
    <% @resultados.each do |resultado| %>
-   <% if @formulario.id == resultado.formulario_id%>
-      <% if question.id == resultado.question_id  %>
+   <% if @historium.id == resultado.formulario_id%>
         <% if resultado.question.subcat.nombre == 'GOB1. Participación de grupos de interés' %>
           <%valor = resultado.respuesta.to_f%>
           <% gob1 = gob1 + valor %>
@@ -45,16 +65,54 @@
             <% valor = resultado.respuesta.to_f %>
             <%gob4 = gob4 + valor %>
         <% elsif resultado.question.subcat.nombre == 'GOB5. Huella de Carbono'%>
-              <% valor = resultado.respuesta.to_f %>
-              <%gob5 = gob5 + valor %>
+            <% if resultado.question.indicador == 'GOB5.1' %>
+               <% igob5 = resultado.respuesta %>
+                <% if igob5 == '2.0' || igob5 == '3.0' %>
+                  <% total = 20 %>
+                <%elsif %>
+                  <% total = 0.0 %>
+                <%end%>
+            <% elsif resultado.question.indicador == 'GOB5.3' || resultado.question.indicador == 'GOB5.4' || resultado.question.indicador == 'GOB5.5' || resultado.question.indicador == 'GOB5.6'%>
+                <% igob6 = resultado.respuesta %>
+                <% if igob5 == '3.0' && igob6 == '1.0' %>
+                  <% suma = suma + 5 %>
+                  <% if suma > 10 %>
+                    <% suma = 10 %>
+                  <% end %>
+                <%elsif%>
+                  <% suma = suma %>
+                <%end%>
+            <%elsif resultado.question.indicador == 'GOB5.8' %>
+                <% igob7 = resultado.respuesta.to_f %>
+                <% if igob7 > 0 %>
+                  <% @resultados.each do |res| %>
+                    <% if res.question.indicador == 'DI28'%>
+                      <% di28 = res.respuesta.to_f %>
+                    <%elsif res.question.indicador == 'DI29' %>
+                      <% di29 = res.respuesta.to_f %>
+                    <%end%>
+                  <%end%>
+                  <% if igob5 == '3.0' %>
+                    <% if di29 > 0 %>
+                      <% puntaje = (50*((di29 - igob7)/ di29))%>
+                    <%end%>
+                  <% elsif igob5 != '3.0' %>
+                    <% if di28 > 0 %>
+                      <% puntaje = 40*((di28 - igob7)/ di28)%>
+                    <%end%>
+                  <%end%>
+                <%end%>
+            <%elsif %>
+              <% resto = resto + resultado.respuesta.to_f %>
+            <%end%>
        <% elsif resultado.question.subcat.nombre == 'GOB6. Coordinación Sustentabilidad'%>
                   <% valor = resultado.respuesta.to_f %>
                   <%gob6 = gob6 + valor %>
         <%end%>
       <% end %>
     <% end %>
-  <% end %>
-  <%end%>
+
+
 <%gob1b=gob1.round(1)%>
 <%gob1= (gob1*0.24).round(1)%>
 <%gob2b=gob2.round(1)%>
@@ -62,13 +120,32 @@
 <%gob3b= (gob3).round(1)%>
 <%gob3=(gob3b*0.14).round(1)%>
 <%gob4b=gob4.round(1)%>
-<%gob4=(gob4*0.14).round(1)%>
-<%gob5b=gob5.round(1)%>
-<%gob5=(gob5*0.14).round(1)%>
+<%gob4=(gob4*0.11).round(1)%>
+<%gob5b=(total + suma + resto + puntaje ).round(1)%>
+<%gob5=(gob5b*0.11).round(1)%>
 <%gob6b=(gob6.round(1))%>
-<%gob6= (gob6*0.14).round(1)%>
+<%gob6= (gob6*0.26).round(1)%>
 <% gob = (gob1 + gob2 + gob3 + gob4 + gob5 + gob6).round(1) %>
 <%gobt = (gob*0.19).round(1)%>
+<%global = gobt %>
+
+<%= form.hidden_field 'global',:value => global %>
+<%= form.hidden_field 'gobpon',:value => gob%>
+<%= form.hidden_field 'gobbru',:value => gobt %>
+<%= form.hidden_field 'gob1pon',:value => gob1%>
+<%= form.hidden_field 'gob1bru',:value => gob1b%>
+<%= form.hidden_field 'gob2pon',:value => gob2%>
+<%= form.hidden_field 'gob2bru',:value => gob2b%>
+<%= form.hidden_field 'gob3pon',:value => gob3%>
+<%= form.hidden_field 'gob3bru',:value => gob3b%>
+<%= form.hidden_field 'gob4pon',:value => gob4%>
+<%= form.hidden_field 'gob4bru',:value => gob4b%>
+<%= form.hidden_field 'gob5pon',:value => gob5%>
+<%= form.hidden_field 'gob5bru',:value => gob5b%>
+<%= form.hidden_field 'gob6pon',:value => gob6%>
+<%= form.hidden_field 'gob6bru',:value => gob6b%>
+
+
 <div class="container" style=" font-family: monospace; margin-top: 60px;">
     <div class="row">
         <div class="col-12">
@@ -97,7 +174,7 @@
                       &nbsp;&nbsp;&nbsp;<div class="col-md-2" style="background-color: 	#DCDCDC">
                       </br><p class="font-weight-bold mb-1" style="font-size: 15pt; font-family: monospace;">Resultado Global</p></br>
                       <p class="font-weight-bold mb-1" style="font-size: 10pt; font-family: monospace;">Sobre un total de 100 puntos la institución obtiene:</p> </br>
-                      <p class="col-md-11 text-center" style="font-size: 25pt; font-family: monospace;"> <%= gobt %></p>
+                      <p class="col-md-11 text-center" style="font-size: 25pt; font-family: monospace;"> <%= global %></p>
                     </div>&nbsp;&nbsp;&nbsp;
 
                       <div class="col-md-4" style="background-color: 	#FFF">
@@ -769,6 +846,8 @@
                                            </div></div>
                        </section>
                     </div>
+                    <button class="btn btn-success pull-right" type="submit" >APROBADO</button>
+                     <%= link_to 'Editar', historia_path , class: 'btn btn-success ',style:'font-size: 15pt; font-family: serif;' %>
                   </div>
                 </div>
 
@@ -776,4 +855,4 @@
             </div>
         </div>
     </div>
-<%= link_to 'Back', formularios_path %>
+<% end %>
