@@ -67,6 +67,8 @@
 <%pa=0.0%>
 <%pj=0.0%>
 <%cu31 = 0.0%>
+<%s =0.0%>
+<%aux5= 0.0%>
 
    <% @resultados.each do |resultado| %>
    <% if @historium.id == resultado.formulario_id%>
@@ -281,7 +283,14 @@
                       <%elsif %>
                           <%pj=0%>
                       <%end%>
-
+              <%elsif resultado.question.subcat.nombre == 'CU7. Actividades de difusión y sensibilización'%>
+                  <% aux5 =  resultado.respuesta %>
+                  <% s = s + aux5.to_f %>
+                  <% if s >100 %>
+                      <% s = 100%>
+                  <%elsif %>
+                    <% s = s %>
+                  <%end%>
 
 
 
@@ -316,7 +325,9 @@
 <%cu5=(cu5b*0.0725).round(1)%>
 <%cu6b=pj.round(1)%>
 <%cu6=(cu6b*0.0725).round(1)%>
-<%cu =(cu1 + cu2 + cu3 + cu4 + cu5 + cu6 ).round(1) %>
+<%cu7b=s.round(1)%>
+<%cu7=(cu7b*0.37).round(1)%>
+<%cu =(cu1 + cu2 + cu3 + cu4 + cu5 + cu6 + cu7).round(1) %>
 <%cut = (cu * 0.22 ).round(1)%>
 <%global = puntaje %>
 
@@ -350,6 +361,8 @@
 <%= form.hidden_field 'cu5bru',:value => cu5b%>
 <%= form.hidden_field 'cu6pon',:value => cu6%>
 <%= form.hidden_field 'cu6bru',:value => cu6b%>
+<%= form.hidden_field 'cu7pon',:value => cu7%>
+<%= form.hidden_field 'cu7bru',:value => cu7b%>
 
 
 <div class="container" style=" font-family: monospace; margin-top: 60px;">
@@ -621,8 +634,8 @@
                                            <td  style="background-color:  #ffc266 ;color: #fff">CU7</td>
                                            <td>Actividades de difusión y sensibilización</td>
                                            <td>0.37</td>
-                                           <td></td>
-                                           <td></td>
+                                           <td><%= cu7b%></td>
+                                           <td><%= cu7 %></td>
                                       </tr>
                                       <tr style="font-size: 12pt; ">
 
@@ -642,14 +655,14 @@
                                           <div class="col-md-6">
                                             <div class="card-img">
                                             </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Bruto</p><br>
-                                                 <%= bar_chart [["CU1", cu1b],["CU2", cu2b],["CU3", cu3b],["CU4", cu4b],["CU5", cu5b],["CU6", cu6b]]%>
+                                                 <%= bar_chart [["CU1", cu1b],["CU2", cu2b],["CU3", cu3b],["CU4", cu4b],["CU5", cu5b],["CU6", cu6b],["CU7", cu7b]]%>
                                            </div></div>
                        </section>
                       <section class="details-card">
                                           <div class="col-md-6">
                                             <div class="card-img">
                                             </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Ponderado</p><br>
-                                                 <%= pie_chart [["CU1", cu1],["CU2", cu2],["CU3", cu3],["CU3", cu4],["CU5", cu5],["CU6", cu6b],["", 100 - cu1-cu2-cu3-cu4-cu5-cu6]]%>
+                                                 <%= pie_chart [["CU1", cu1],["CU2", cu2],["CU3", cu3],["CU3", cu4],["CU5", cu5],["CU6", cu6],["CU7", cu7],["", 100 - cu1-cu2-cu3-cu4-cu5-cu6-cu7]]%>
                                            </div></div>
                        </section>
                     </div>
