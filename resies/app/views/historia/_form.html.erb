@@ -36,6 +36,37 @@
 <%di291=0.0%>
 <%puntaje = 0.0 %>
 <%resta= 0.0 %>
+<%punt=0.0%>
+<%cu1=0.0%>
+<%cu1b =0.0%>
+<%cu2 = 0.0 %>
+<%cu2b = 0.0 %>
+<%cu3 = 0.0 %>
+<%cu3b = 0.0 %>
+<%cu4 = 0.0 %>
+<%cu4b = 0.0 %>
+<%cu5 = 0.0 %>
+<%cu5b = 0.0 %>
+<%cu = 0.0 %>
+<% cut = 0.0 %>
+<% val = 0.0%>
+<%di12 = 0.0 %>
+<%di13 = 0.0 %>
+<%di14 = 0.0 %>
+<%di15 = 0.0 %>
+<%di18 = 0.0 %>
+<%di20 = 0.0 %>
+<%cu11 = 0.0%>
+<%pu = 0.0 %>
+<%pt = 0.0 %>
+<%aux = 0.0 %>
+<%aux2 = 0.0 %>
+<%aux3 = 0.0%>
+<% aux4 =1.0%>
+<%pe = 0.0 %>
+<%pa=0.0%>
+<%pj=0.0%>
+<%cu31 = 0.0%>
 
    <% @resultados.each do |resultado| %>
    <% if @historium.id == resultado.formulario_id%>
@@ -65,49 +96,195 @@
             <% valor = resultado.respuesta.to_f %>
             <%gob4 = gob4 + valor %>
         <% elsif resultado.question.subcat.nombre == 'GOB5. Huella de Carbono'%>
-            <% if resultado.question.indicador == 'GOB5.1' %>
-               <% igob5 = resultado.respuesta %>
-                <% if igob5 == '2.0' || igob5 == '3.0' %>
-                  <% total = 20 %>
-                <%elsif %>
-                  <% total = 0.0 %>
-                <%end%>
-            <% elsif resultado.question.indicador == 'GOB5.3' || resultado.question.indicador == 'GOB5.4' || resultado.question.indicador == 'GOB5.5' || resultado.question.indicador == 'GOB5.6'%>
-                <% igob6 = resultado.respuesta %>
-                <% if igob5 == '3.0' && igob6 == '1.0' %>
-                  <% suma = suma + 5 %>
-                  <% if suma > 10 %>
-                    <% suma = 10 %>
-                  <% end %>
-                <%elsif%>
-                  <% suma = suma %>
-                <%end%>
-            <%elsif resultado.question.indicador == 'GOB5.8' %>
-                <% igob7 = resultado.respuesta.to_f %>
-                <% if igob7 > 0 %>
-                  <% @resultados.each do |res| %>
-                    <% if res.question.indicador == 'DI28'%>
-                      <% di28 = res.respuesta.to_f %>
-                    <%elsif res.question.indicador == 'DI29' %>
-                      <% di29 = res.respuesta.to_f %>
-                    <%end%>
-                  <%end%>
-                  <% if igob5 == '3.0' %>
-                    <% if di29 > 0 %>
-                      <% puntaje = (50*((di29 - igob7)/ di29))%>
-                    <%end%>
-                  <% elsif igob5 != '3.0' %>
-                    <% if di28 > 0 %>
-                      <% puntaje = 40*((di28 - igob7)/ di28)%>
-                    <%end%>
-                  <%end%>
-                <%end%>
+          <% if resultado.question.indicador == 'GOB5.1' %>
+            <% igob5 = resultado.respuesta %>
+            <% if igob5 == '2.0' || igob5 == '3.0' %>
+                <% total = 20 %>
             <%elsif %>
-              <% resto = resto + resultado.respuesta.to_f %>
-            <%end%>
+                <% total = 0.0 %>
+             <%end%>
+          <% elsif resultado.question.indicador == 'GOB5.3' || resultado.question.indicador == 'GOB5.4' || resultado.question.indicador == 'GOB5.5' || resultado.question.indicador == 'GOB5.6'%>
+              <% igob6 = resultado.respuesta %>
+              <% if igob5 == '3.0' && igob6 == '1.0' %>
+                 <% suma = suma + 5 %>
+                 <% if suma > 10 %>
+                    <% suma = 10 %>
+                 <% end %>
+             <%elsif%>
+                 <% suma = suma %>
+             <%end%>
+            <%elsif resultado.question.indicador == 'GOB5.8' %>
+                   <% igob7 = resultado.respuesta.to_f %>
+                   <% if igob7 > 0 %>
+                     <% @resultados.each do |res| %>
+                       <% if res.question.indicador == 'DI28'%>
+                         <% di28 = res.respuesta.to_f %>
+                       <%elsif res.question.indicador == 'DI29' %>
+                         <% di29 = res.respuesta.to_f %>
+                       <%end%>
+                     <%end%>
+                     <% if igob5 == '3.0' %>
+                       <% if di29 > 0 %>
+                         <% puntaje = (50*((di29 - igob7)/ di29))%>
+                       <%end%>
+                     <% elsif igob5 != '3.0' %>
+                       <% if di28 > 0 %>
+                         <% puntaje = 40*((di28 - igob7)/ di28)%>
+                       <%end%>
+                     <%end%>
+                   <%end%>
+               <%elsif %>
+                 <% resto = resto + resultado.respuesta.to_f %>
+               <%end%>
        <% elsif resultado.question.subcat.nombre == 'GOB6. Coordinación Sustentabilidad'%>
                   <% valor = resultado.respuesta.to_f %>
                   <%gob6 = gob6 + valor %>
+        <%elsif resultado.question.subcat.nombre == 'CU1. Estudiantes promotores de la Sustentabilidad' %>
+            <% if resultado.question.indicador == 'CU1.1' %>
+                <% cu11 = resultado.respuesta %>
+            <% elsif resultado.question.indicador != 'CU1.5' && resultado.question.indicador != 'CU1.1'%>
+                <% val = val + resultado.respuesta.to_f%>
+            <% elsif resultado.question.indicador == 'CU1.5' %>
+                <% cu15 = resultado.respuesta %>
+                <% @resultados.each do |res| %>
+                  <% if res.question.indicador == 'DI12' %>
+                      <% di12 =  res.respuesta %>
+                  <%elsif res.question.indicador == 'DI13' %>
+                      <% di13 =  res.respuesta %>
+                  <%end%>
+                 <%end%>
+                 <%if  cu11 == '1.0'%>
+                  <% sum = di12.to_f + di13.to_f %>
+                  <% if sum > 0 %>
+                      <% ptj = cu15.to_f / sum %>
+                  <%elsif %>
+                    <% ptj = 0%>
+                  <%end%>
+                  <%if val > 1 %>
+                  <% aux2 = 2000 * ptj * 1 %>
+                  <% if aux2 > 100 %>
+                      <% punt = 100%>
+                  <% elsif %>
+                      <% punt = aux2 %>
+                  <%end%>
+                  <%elsif%>
+                      <%punt = 0%>
+                  <%end%>
+                <%end%>
+              <%end%>
+          <%elsif resultado.question.subcat.nombre == 'CU2. Inducción a la Sustentabilidad para estudiantes'%>
+              <% if resultado.question.indicador != 'CU2.2'%>
+                  <%  aux = resultado.respuesta %>
+              <%elsif resultado.question.indicador == 'CU2.2'%>
+                    <%aux2 = resultado.respuesta.to_f%>
+                    <% @resultados.each do |res| %>
+                        <% if res.question.indicador == 'DI14'%>
+                            <%di14 = res.respuesta %>
+                        <% elsif res.question.indicador == 'DI15'%>
+                            <%di15 = res.respuesta %>
+                        <%end%>
+                    <%end%>
+                    <% sum = di15.to_f + di14.to_f %>
+                    <%aux3 = aux2 / sum %>
+                    <%if aux2 > sum %>
+                      <% pu = 0 %>
+                    <% elsif %>
+                        <% if aux == '1.0' %>
+                            <% pu = 100 * aux3 %>
+                        <%elsif %>
+                            <% pu = 0 %>
+                        <%end%>
+                    <%end%>
+              <%end%>
+              <%elsif resultado.question.subcat.nombre == 'CU3. Funcionarios promotores de la Sustentabilidad' %>
+                  <% if resultado.question.indicador == 'CU3.1' %>
+                      <% cu31 = resultado.respuesta %>
+                  <% elsif resultado.question.indicador != 'CU3.5' && resultado.question.indicador != 'CU3.1'%>
+                      <% val = val + resultado.respuesta.to_f%>
+                  <% elsif resultado.question.indicador == 'CU3.5' %>
+                      <% cu35 = resultado.respuesta %>
+                      <% @resultados.each do |res| %>
+                        <% if res.question.indicador == 'DI18' %>
+                            <% di18 =  res.respuesta %>
+                        <%elsif res.question.indicador == 'DI20' %>
+                            <% di20 =  res.respuesta %>
+                        <%end%>
+                       <%end%>
+                       <%if  cu31 == '1.0'%>
+                        <% su = di18.to_f + di20.to_f %>
+                        <% if su > 0 %>
+                            <% ptj = cu35.to_f / su %>
+                        <%elsif %>
+                          <% ptj = 0%>
+                        <%end%>
+                        <%if val > 1 %>
+                        <% aux2 = 2000 * ptj * 1 %>
+                        <% if aux2 > 100 %>
+                            <% pt = 100%>
+                        <% elsif %>
+                            <% pt = aux2 %>
+                        <%end%>
+                        <%elsif%>
+                            <%pt = 0%>
+                        <%end%>
+                      <%end%>
+                    <%end%>
+                <%elsif resultado.question.subcat.nombre == 'CU4.Inducción a la sustentabilidad para funcionarios'%>
+                        <% if resultado.question.indicador != 'CU4.2'%>
+                            <%  aux = resultado.respuesta %>
+                        <%elsif resultado.question.indicador == 'CU4.2'%>
+                              <%aux2 = resultado.respuesta.to_f%>
+                              <%aux3 = aux2 / di20.to_f %>
+                              <%if aux3 > 1.0 %>
+                                <% pe = 100 %>
+                              <% elsif %>
+                                  <% if aux == '1.0' %>
+                                      <% pe = 100 * aux3 %>
+                                  <%elsif %>
+                                      <% pe = 0 %>
+                                  <%end%>
+                              <%end%>
+                          <%end%>
+                  <%elsif resultado.question.subcat.nombre == 'CU5. Programa de prácticas sustentables para oficinas'%>
+                        <% if resultado.question.indicador == 'CU5.1'%>
+                            <%  aux = resultado.respuesta %>
+                        <%elsif resultado.question.indicador == 'CU5.2'%>
+                            <%aux2 = resultado.respuesta.to_f%>
+                        <%elsif resultado.question.indicador== 'CU5.3'%>
+                            <%aux3 = resultado.respuesta.to_f %>
+                        <%end%>
+                        <%if aux == '1.0' %>
+                          <% aux4 = aux2 /aux3  %>
+                          <% pa = 200 * aux4 %>
+                          <%if pa > 100 %>
+                            <% pa = 100 %>
+                          <%elsif %>
+                            <% pa=pa %>
+                          <%end%>
+                        <%elsif %>
+                          <%pa=0%>
+                        <%end%>
+                <%elsif resultado.question.subcat.nombre == 'CU6. Programa de desarrollo profesional en sustentabilidad'%>
+                      <% if resultado.question.indicador == 'CU6.1'%>
+                            <%  aux = resultado.respuesta %>
+                      <%elsif resultado.question.indicador == 'CU6.2'%>
+                            <%aux2 = resultado.respuesta.to_f%>
+                      <%end%>
+                      <%if aux == '1.0' %>
+                          <% aux4 = aux2 /di20.to_f  %>
+                          <% pj = 1000 * aux4 %>
+                          <%if pj > 100 %>
+                             <% pj = 100 %>
+                          <%elsif %>
+                            <% pj=pj %>
+                          <%end%>
+                      <%elsif %>
+                          <%pj=0%>
+                      <%end%>
+
+
+
+
         <%end%>
       <% end %>
     <% end %>
@@ -127,7 +304,22 @@
 <%gob6= (gob6*0.26).round(1)%>
 <% gob = (gob1 + gob2 + gob3 + gob4 + gob5 + gob6).round(1) %>
 <%gobt = (gob*0.19).round(1)%>
-<%global = gobt %>
+<%cu1b=punt.round(1)%>
+<%cu1=(cu1b*0.17).round(1)%>
+<%cu2b=pu.round(1)%>
+<%cu2=(cu2b*0.17).round(1)%>
+<%cu3b=pt.round(1)%>
+<%cu3=(cu3b*0.0725).round(1)%>
+<%cu4b=pe.round(1)%>
+<%cu4=(cu4b*0.0725).round(1)%>
+<%cu5b=pa.round(1)%>
+<%cu5=(cu5b*0.0725).round(1)%>
+<%cu6b=pj.round(1)%>
+<%cu6=(cu6b*0.0725).round(1)%>
+<%cu =(cu1 + cu2 + cu3 + cu4 + cu5 + cu6 ).round(1) %>
+<%cut = (cu * 0.22 ).round(1)%>
+<%global = puntaje %>
+
 
 <%= form.hidden_field 'global',:value => global %>
 <%= form.hidden_field 'gobpon',:value => gob%>
@@ -144,6 +336,20 @@
 <%= form.hidden_field 'gob5bru',:value => gob5b%>
 <%= form.hidden_field 'gob6pon',:value => gob6%>
 <%= form.hidden_field 'gob6bru',:value => gob6b%>
+<%= form.hidden_field 'cu1pon',:value => cu%>
+<%= form.hidden_field 'cu1bru',:value => cut%>
+<%= form.hidden_field 'cu1pon',:value => cu1%>
+<%= form.hidden_field 'cu1bru',:value => cu1b%>
+<%= form.hidden_field 'cu2pon',:value => cu2%>
+<%= form.hidden_field 'cu2bru',:value => cu2b%>
+<%= form.hidden_field 'cu3pon',:value => cu3%>
+<%= form.hidden_field 'cu3bru',:value => cu3b%>
+<%= form.hidden_field 'cu4pon',:value => cu4%>
+<%= form.hidden_field 'cu4bru',:value => cu4b%>
+<%= form.hidden_field 'cu5pon',:value => cu5%>
+<%= form.hidden_field 'cu5bru',:value => cu5b%>
+<%= form.hidden_field 'cu6pon',:value => cu6%>
+<%= form.hidden_field 'cu6bru',:value => cu6b%>
 
 
 <div class="container" style=" font-family: monospace; margin-top: 60px;">
@@ -199,8 +405,8 @@
                                       <tr>
                                            <td class="font-weight-bold mb-1 text-center" style="font-size: 8pt; font-family: monospace; background-color: #DAA520">Cultura sustentable</td>
                                            <td style="background-color: #fff">0.22</td>
-                                           <td style="background-color: #fff"></td>
-                                           <td style="background-color: #fff"></td>
+                                           <td style="background-color: #fff"><%=cu%></td>
+                                           <td style="background-color: #fff"><%=cut%></td>
                                       </tr>
                                       <tr>
                                            <td class="font-weight-bold mb-1 text-center" style="font-size: 8pt; font-family: monospace; background-color: #BA55D3">Academia</td>
@@ -233,7 +439,7 @@
                                           <div class="col-md-7">
                                           </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Bruto</p><br>
                                              <div class="card-img">
-                                            <%= bar_chart [["Gobernanza", gob],["Cultura", ],["Academia", ],["Campus", ],["Responsabilidad", ]]%>
+                                            <%= bar_chart [["Gobernanza", gob],["Cultura", cu ],["Academia",  ],["Campus", ],["Responsabilidad", ]]%>
                                            </div></div>
                        </section>
                       <section class="details-card">
@@ -241,7 +447,7 @@
                                              <div class="card-img">
                                              </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Ponderado</p><br>
 
-                                                 <%= pie_chart [["Gob", gobt],["", 100-gobt]]%>
+                                                 <%= pie_chart [["Gobernanza", gobt],["Cultura", cut],["", 100-gobt-cut]]%>
                                            </div></div>
                        </section>
                     </div>
@@ -371,44 +577,44 @@
                                            <td  style="background-color:  #800000 ;color: #fff">CU1</td>
                                            <td>Estudiantes promotores de la sustentabilidad</td>
                                            <td>0.17</td>
-                                           <td></td>
-                                           <td></td>
+                                           <td><%=cu1b%></td>
+                                           <td><%=cu1%></td>
                                       </tr>
                                       <tr style="font-size: 8pt; " >
                                            <td  style="background-color:  #b31400 ;color: #fff">CU2</td>
                                            <td>Inducción a la sustentabilidad para estudiantes</td>
                                            <td>0.17</td>
-                                           <td></td>
-                                           <td></td>
+                                           <td><%=cu2b%></td>
+                                           <td><%=cu2%></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                         <td rowspan="4" >Funcionarios</td>
                                            <td  style=" background-color: #6e3800;color: #fff">CU3</td>
                                            <td>Funcionarios promotores de la sustentabilidad</td>
-                                           <td>0.7</td>
-                                           <td></td>
-                                           <td></td>
+                                           <td>0.07</td>
+                                           <td><%= cu3b%></td>
+                                           <td><%= cu3%></td>
                                       </tr>
                                       <tr style="font-size: 8pt; " >
                                            <td  style=" background-color:  #945200 ;color: #fff">CU4</td>
                                            <td>Inducción a la sustentabilidad para funcionarios</td>
-                                           <td>0.7</td>
-                                           <td></td>
-                                           <td></td>
+                                           <td>0.07</td>
+                                           <td><%=cu4b%></td>
+                                           <td><%=cu4%></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                            <td  style=" background-color:  #f79400;color: #fff">CU5</td>
                                            <td>Programa de prácticas sustentables para oficinas</td>
-                                           <td>0.7</td>
-                                           <td></td>
-                                           <td></td>
+                                           <td>0.07</td>
+                                           <td><%=cu5b%></td>
+                                           <td><%=cu5%></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                            <td  style="background-color:#ffb240 ;color: #fff">CU6</td>
                                            <td>Programas de desarrollo profesional</td>
-                                           <td>0.7</td>
-                                           <td></td>
-                                           <td></td>
+                                           <td>0.07</td>
+                                           <td><%= cu6b%></td>
+                                           <td><%=cu6%></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                            <td>Sensibilización y Participación </td>
@@ -421,7 +627,7 @@
                                       <tr style="font-size: 12pt; ">
 
                                            <td colspan="3" class="font-weight-bold mb-2" >Resultado Categoría</td>
-                                           <td colspan="3" class="font-weight-bold mb-2" ></td>
+                                           <td colspan="3" class="font-weight-bold mb-2" ><%= cu %></td>
                                       </tr>
                                 </tbody>
                             </table>
@@ -436,14 +642,14 @@
                                           <div class="col-md-6">
                                             <div class="card-img">
                                             </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Bruto</p><br>
-                                                 <%= bar_chart []%>
+                                                 <%= bar_chart [["CU1", cu1b],["CU2", cu2b],["CU3", cu3b],["CU4", cu4b],["CU5", cu5b],["CU6", cu6b]]%>
                                            </div></div>
                        </section>
                       <section class="details-card">
                                           <div class="col-md-6">
                                             <div class="card-img">
                                             </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Ponderado</p><br>
-                                                 <%= pie_chart []%>
+                                                 <%= pie_chart [["CU1", cu1],["CU2", cu2],["CU3", cu3],["CU3", cu4],["CU5", cu5],["CU6", cu6b],["", 100 - cu1-cu2-cu3-cu4-cu5-cu6]]%>
                                            </div></div>
                        </section>
                     </div>
