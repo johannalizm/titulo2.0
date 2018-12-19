@@ -13,6 +13,11 @@ gem 'paperclip', '~> 4.3', '>=  4.3.6'
 gem 'devise'
 #Gema Graficos
 gem 'chartkick'
+#Gema para generar PDF
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary-edge'
+#Gema paginacion
+gem 'kaminari'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
 # Use postgresql as the database for Active Record

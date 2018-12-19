@@ -45,6 +45,17 @@
                  <a><%= link_to 'Editar', edit_question_path(question) , :class => "btn btn-warning"%></a>
                </td>
              </tr>
+
            <% end %>
 </br></br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
 <span class="	glyphicon glyphicon-edit" style="font-size: 20pt"><%= link_to 'Nueva Pregunta', new_question_path, class:'btn' %></span>
+
+
+</tbody>
+</table>
+</div>
+</div>
+<div align= right style="marign:10px;">
+<span  style="font-size: 18pt;"><%= paginate @questions %></span>
+</div>
+</div>

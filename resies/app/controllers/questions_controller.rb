@@ -4,7 +4,10 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.order("indicador").page(params[:page]).per(10)
+    if params[:search]
+      @questions = Question.search(params[:search]).order("created_at DESC").page(params[:page]).per(10)
+      end
   end
 
   # GET /questions/1

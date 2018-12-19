@@ -12,6 +12,19 @@ class HistoriaController < ApplicationController
   def show
     @questions = Question.all
     @resultados = Resultado.all
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf do
+        render pdf: "Reporte RESIES",
+         disposition: 'attachment',
+        template: "historia/show.html.erb"
+
+      end
+
+
+    end
+
   end
 
   # GET /historia/new

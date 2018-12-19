@@ -10,19 +10,13 @@
       </ul>
     </div>
   <% end %>
-<%= wicked_pdf_stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" %>
-<%= wicked_pdf_javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"%>
-<%= wicked_pdf_javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"%>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <%= stylesheet_link_tag "formulariomostrar.css" %>
-<%= wicked_pdf_stylesheet_link_tag "formulariomostrar.css" %>
-<%= javascript_include_tag "http://www.google.com/jsapi" %>
+<%= wicked_pdf_stylesheet_link_tag "formulariomostrar.css" -%>
 
-<%aux6=0.0%>
-<%ac21=0%>
-<%x=0.0%>
-<%i14=0.0%>
-<%j4=0%>
 <% gob= 0.0 %>
 <% gob1= 0.0 %>
 <% gob2= 0.0 %>
@@ -71,71 +65,11 @@
 <%aux3 = 0.0%>
 <% aux4 =1.0%>
 <%pe = 0.0 %>
-<%hsum=0.0%>
 <%pa=0.0%>
 <%pj=0.0%>
 <%cu31 = 0.0%>
 <%s =0.0%>
 <%aux5= 0.0%>
-<%sumac1 =0.0%>
-<%ac1b= 0.0%>
-<%ac1 =0.0%>
-<%ac=0.0%>
-<%act=0.0%>
-<%ac12 =0.0%>
-<%di16= 0.0%>
-<%ac3b=0.0%>
-<%ac3=0.0%>
-<%ac4b=0.0%>
-<%ac4=0.0%>
-<%ac5b=0.0%>
-<%ac5=0.0%>
-<%ac6b=0.0%>
-<%ac6=0.0%>
-<%ac7b=0.0%>
-<%ac7=0.0%>
-<%t=0.0%>
-<%j16=0.0%>
-<%j17=0.0%>
-<%di17=0.0%>
-<%j27=0.0%>
-<%ac72 =0.0%>
-<%ac71=0.0%>
-<%ac2b = 0.0%>
-<%ac2 = 0.0%>
-<%h14 = 0.0%>
-<%m=0%>
-<%ac8b =0.0%>
-<%ac8 =0.0%>
-<%rs1=0.0%>
-<%rs1b=0.0%>
-<%rs =0.0 %>
-<%rst=0.0%>
-<%rs12=0%>
-<%rs11=0%>
-<%rs4=0.0%>
-<%rs4b=0.0%>
-<%rs45 =0%>
-<%rs4s=0%>
-<%rs4t=0%>
-<%h4=0%>
-<%j4=0%>
-<%rs5=0.0%>
-<%rs5b=0.0%>
-<%rs5r=0%>
-<%rs6=0.0%>
-<%rs6b=0.0%>
-<%rs6r=0%>
-<%rs8=0.0%>
-<%rs8b=0.0%>
-<%rs8r=0%>
-<%rs8s = 0 %>
-<%r82=0%>
-<%r82r=0%>
-<%rs9=0.0%>
-<%rs9b=0.0%>
-<%rs9r=0%>
-<%j36=0%>
 
    <% @resultados.each do |resultado| %>
    <% if @historium.id == resultado.formulario_id%>
@@ -219,6 +153,7 @@
                   <% if res.question.indicador == 'DI12' %>
                       <% di12 =  res.respuesta %>
                   <%elsif res.question.indicador == 'DI13' %>
+                      <% di13 =  res.respuesta %>
                   <%end%>
                  <%end%>
                  <%if  cu11 == '1.0'%>
@@ -229,7 +164,6 @@
                     <% ptj = 0%>
                   <%end%>
                   <%if val > 1 %>
-                  <% di13 =  res.respuesta %>
                   <% aux2 = 2000 * ptj * 1 %>
                   <% if aux2 > 100 %>
                       <% punt = 100%>
@@ -358,233 +292,6 @@
                   <%elsif %>
                     <% s = s %>
                   <%end%>
-              <%elsif resultado.question.subcat.nombre == 'AC1. Curso mínimo transversal de pregrado'%>
-                  <%if resultado.question.indicador == 'AC1.1'%>
-                      <%sumac1= resultado.respuesta.to_f %>
-                  <%elsif resultado.question.indicador == 'AC1.2'%>
-                      <% ac12 = resultado.respuesta %>
-                  <% elsif resultado.question.indicador == 'AC1.3'%>
-                      <% ac13 = resultado.respuesta.to_f %>
-                      <% @resultados.each do |rs| %>
-                        <% if rs.question.indicador == 'DI14' %>
-                            <% di14 =  rs.respuesta %>
-                       <%end%>
-                      <%end%>
-                      <% s2 = ac13/di14.to_f %>
-                      <%if ac12 == '1.0' %>
-                          <% i4 = 100*s2 %>
-                      <%elsif ac12 != '1.0'  %>
-                          <% i4 = 0 %>
-                      <%end%>
-                      <% if s2 > 1.0 %>
-                          <%sumac1 = sumac1 + 0%>
-                      <%elsif%>
-                          <% sumac1 =sumac1 + i4%>
-                      <%end%>
-                  <%end%>
-              <%elsif resultado.question.subcat.nombre == 'AC2. Capacitación profesores'%>
-                  <% if resultado.question.indicador == 'AC2.1'%>
-                      <% ac21= resultado.respuesta %>
-                  <% elsif resultado.question.indicador != 'AC2.8' && resultado.question.indicador != 'AC2.1' %>
-                     <% h= resultado.respuesta%>
-                     <%hsum = hsum + h.to_f%>
-                  <%elsif resultado.question.indicador == 'AC2.8'%>
-                      <% ac28 = resultado.respuesta %>
-                      <% if  ac21 == '1.0'%>
-                        <% if hsum.to_f >= 2 %>
-                            <% x = 1 %>
-                        <%elsif %>
-                            <% x = 0 %>
-                        <%end%>
-                      <%elsif ac21 == '0.0'%>
-                          <% x = 0%>
-                      <%end%>
-                      <% @resultados.each do |rs| %>
-                        <% if rs.question.indicador == 'DI18' %>
-                            <% di18 =  rs.respuesta %>
-                       <%end%>
-                      <%end%>
-                      <%aux6= ac28.to_f / di18.to_f %>
-                      <%if x == 1 %>
-                        <%i14= aux6 * 1000  %>
-                      <%elsif x==0%>
-                          <%i14= 0%>
-                      <%end%>
-                      <% if i14 > 100 %>
-                          <% h14 = 100 %>
-                      <%elsif i14 == 0 %>
-                        <% h14 = 0%>
-                      <%elsif %>
-                        <%h14 =i14%>
-                      <%end%>
-                  <%end%>
-                  <%if hsum >= 4 %>
-                      <% m = h14 %>
-                  <%elsif %>
-                      <% m = 0 %>
-                  <%end%>
-              <%elsif resultado.question.subcat.nombre == 'AC3. Evaluación conocimiento sustentabilidad de estudiantes'%>
-                  <%if resultado.question.indicador == 'AC3.1'%>
-                      <% ac31 = resultado.respuesta %>
-                      <% @resultados.each do |rs| %>
-                        <% if rs.question.indicador == 'DI14' %>
-                            <% di14 =  rs.respuesta %>
-                       <%end%>
-                      <%end%>
-                      <% j16= ac31.to_f / di14.to_f%>
-                  <%elsif resultado.question.indicador == 'AC3.2'%>
-                      <% ac32 = resultado.respuesta %>
-                      <% @resultados.each do |rs| %>
-                        <% if rs.question.indicador == 'DI16' %>
-                            <% di16 =  rs.respuesta %>
-                       <%end%>
-                      <%end%>
-                      <% j17 = ac32.to_f / di16.to_f%>
-                      <% t= j16.to_f + j17.to_f%>
-                      <% if t < 2.00001 %>
-                          <% ac3b = (j16*50)+ (j17*50) %>
-                      <% elsif %>
-                          <% ac3b = 0 %>
-                      <%end%>
-                  <%end%>
-              <%elsif resultado.question.subcat.nombre == 'AC4. Programas de postgrado que incluyen competencias en sustentabilidad'%>
-                <% if resultado.question.indicador == 'AC4.1'%>
-                  <%ac41= resultado.respuesta%>
-                  <% @resultados.each do |rs| %>
-                    <% if rs.question.indicador == 'DI17' %>
-                        <% di17 =  rs.respuesta %>
-                   <%end%>
-                  <%end%>
-                  <%j19= ac41.to_f / di17.to_f%>
-                  <% if j19 < 1.00001 %>
-                      <% ac4b = 100*j19 %>
-                  <% elsif %>
-                      <% ac4b = 0 %>
-                  <%end%>
-                <%end%>
-                <%elsif resultado.question.subcat.nombre == 'AC5. Programas de pregrado que incluyen competencias en sustentabilidad'%>
-                  <% if resultado.question.indicador == 'AC5.1'%>
-                      <% ac51= resultado.respuesta%>
-                      <% @resultados.each do |rs| %>
-                        <% if rs.question.indicador == 'DI16' %>
-                            <% di16 =  rs.respuesta %>
-                       <%end%>
-                      <%end%>
-                      <%j21= ac51.to_f / di16.to_f%>
-                      <% if j21 < 1.00001 %>
-                          <% ac5b = 100*j21 %>
-                      <% elsif %>
-                          <% ac5b = 0 %>
-                      <%end%>
-                  <%end%>
-              <%elsif resultado.question.subcat.nombre == 'AC6. Apoyo a la investigación en sustentabilidad'%>
-                  <% y = resultado.respuesta%>
-                  <% ac6b= ac6b + y.to_f %>
-              <%elsif resultado.question.subcat.nombre == 'AC7. Investigación enfocada en sustentabilidad'%>
-                  <% if resultado.question.indicador == 'AC7.1'%>
-                      <% ac71= resultado.respuesta %>
-                  <%elsif resultado.question.indicador == 'AC7.2'%>
-                      <% ac72 = resultado.respuesta.to_f %>
-                  <%elsif resultado.question.indicador == 'AC7.3'%>
-                      <% ac73 = resultado.respuesta.to_f%>
-                      <% if ac73 > 0.0001 %>
-                        <% j27 = ac72.to_f/ac73.to_f %>
-                      <%elsif %>
-                        <%j27=0%>
-                      <%end%>
-                      <%if j27 > 1 %>
-                        <% u = 0 %>
-                      <% elsif j27 < 1 %>
-                          <%if j27 > 0.2%>
-                            <% u = 80 %>
-                          <%elsif %>
-                            <% u = 400*j27%>
-                          <%end%>
-                      <%end%>
-                      <%ac7b=  u + ac71.to_f%>
-              <%end%>
-              <%elsif resultado.question.subcat.nombre == 'AC8. Transferencia de conocimiento'%>
-                <%ac81 = resultado.respuesta %>
-                <% ac8b= ac81.to_f + ac8b %>
-              <%elsif resultado.question.subcat.nombre == 'RS1. Asequibilidad'%>
-                <% if resultado.question.indicador == 'RS1.1'%>
-                  <% rs11= resultado.respuesta%>
-                <%elsif  resultado.question.indicador == 'RS1.2'%>
-                    <% rs12 = resultado.respuesta%>
-                    <% @resultados.each do |rs| %>
-                      <% if rs.question.indicador == 'DI14' %>
-                          <% di14 =  rs.respuesta %>
-                     <%end%>
-                    <%end%>
-                    <% if di14 != ''%>
-                        <% j4 = rs12.to_f/di14.to_f %>
-                    <%elsif di14 == ''%>
-                        <% j4 =0%>
-                    <%end%>
-                    <% if j4 > 0.5 %>
-                        <%h4 = 60%>
-                    <%elsif %>
-                        <% h4 = j4*120 %>
-                    <%end%>
-                    <%rs1b = h4 + rs11.to_f %>
-                <%end%>
-              <%elsif resultado.question.subcat.nombre == 'RS4. Colaboración'%>
-                  <%if resultado.question.indicador != 'RS4.5'%>
-                      <% rs4t= resultado.respuesta %>
-                        <%rs4s= rs4s +rs4t.to_f %>
-                  <%elsif resultado.question.indicador == 'RS4.5'%>
-                    <% rs45 =resultado.respuesta%>
-                    <%if rs4s > 60 %>
-                        <%rs4b = 60 %>
-                    <% elsif%>
-                        <%rs4b = rs4s+rs45.to_f %>
-                    <%end%>
-                  <%end%>
-             <%elsif resultado.question.subcat.nombre == 'RS5. PArticipación en políticas públicas'%>
-                  <% rs5r = resultado.respuesta%>
-                  <% rs5b= rs5b + rs5r.to_f %>
-             <%elsif resultado.question.subcat.nombre == 'RS6. Comunidades vecinas'%>
-                  <% rs6r = resultado.respuesta%>
-                  <% rs6b= rs6b + rs6r.to_f %>
-            <%elsif resultado.question.subcat.nombre == 'RS8. Satisfacción laboral'%>
-                <%if resultado.question.indicador != 'RS8.2'%>
-                    <% rs8r =resultado.respuesta.to_f%>
-                    <% rs8s = rs8s+ rs8r %>
-                <%elsif resultado.question.indicador == 'RS8.2'%>
-                    <% r82= resultado.respuesta.to_f %>
-                    <% if r82 >= 0.6 %>
-                      <%r82r= 50 %>
-                    <%elsif %>
-                      <%r82r = 0%>
-                    <%end%>
-                <%end%>
-                <% rs8b= rs8s + r82r %>
-            <%elsif resultado.question.subcat.nombre == 'RS9. Sindicalización'%>
-                <% rs9r= resultado.respuesta %>
-                <% @resultados.each do |rs| %>
-                  <% if rs.question.indicador == 'DI20' %>
-                      <% di20 =  rs.respuesta %>
-                 <%end%>
-                <%end%>
-                <% if di20 != '' %>
-                    <% j36 = rs9r.to_f/di20.to_f %>
-                <% elsif di20 == ''%>
-                    <%j36=0%>
-                <%end%>
-                <%if j36 > 1 %>
-                    <% rs9b = 0%>
-                <%elsif %>
-                    <%rs9b = 100 *j36%>
-                <%end%>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -593,69 +300,37 @@
     <% end %>
 
 
-<%gob1b=gob1.round(2)%>
-<%gob1= (gob1*0.24).round(2)%>
-<%gob2b=gob2.round(2)%>
-<%gob2= (gob2*0.14).round(2)%>
-<%gob3b= (gob3).round(2)%>
-<%gob3=(gob3b*0.14).round(2)%>
-<%gob4b=gob4.round(2)%>
+<%gob1b=gob1.round(1)%>
+<%gob1= (gob1*0.24).round(1)%>
+<%gob2b=gob2.round(1)%>
+<%gob2= (gob2*0.14).round(1)%>
+<%gob3b= (gob3).round(1)%>
+<%gob3=(gob3b*0.14).round(1)%>
+<%gob4b=gob4.round(1)%>
 <%gob4=(gob4*0.11).round(1)%>
 <%gob5b=(total + suma + resto + puntaje ).round(1)%>
-<%gob5=(gob5b*0.11).round(2)%>
-<%gob6b=(gob6.round(2))%>
-<%gob6= (gob6*0.26).round(2)%>
+<%gob5=(gob5b*0.11).round(1)%>
+<%gob6b=(gob6.round(1))%>
+<%gob6= (gob6*0.26).round(1)%>
 <% gob = (gob1 + gob2 + gob3 + gob4 + gob5 + gob6).round(1) %>
-<%gobt = (gob*0.19).round(2)%>
-<%cu1b=punt.round(2)%>
-<%cu1=(cu1b*0.17).round(2)%>
-<%cu2b=pu.round(2)%>
-<%cu2=(cu2b*0.17).round(2)%>
-<%cu3b=pt.round(2)%>
-<%cu3=(cu3b*0.0725).round(2)%>
-<%cu4b=pe.round(2)%>
-<%cu4=(cu4b*0.0725).round(2)%>
-<%cu5b=pa.round(2)%>
-<%cu5=(cu5b*0.0725).round(2)%>
-<%cu6b=pj.round(2)%>
-<%cu6=(cu6b*0.0725).round(2)%>
-<%cu7b=s.round(2)%>
-<%cu7=(cu7b*0.37).round(2)%>
-<%cu =(cu1 + cu2 + cu3 + cu4 + cu5 + cu6 + cu7).round(2) %>
-<%cut = (cu * 0.22 ).round(2)%>
-<%ac1b=sumac1.round(2)%>
-<%ac1=(ac1b* (0.54/5)).round(2)%>
-<%ac2b=m.round(2)%>
-<%ac2=(ac2b* (0.54/5)).round(2)%>
-<%ac3b=ac3b.round(2)%>
-<%ac3=(ac3b* (0.54/5)).round(2)%>
-<%ac4b=ac4b.round(2)%>
-<%ac4=(ac4b* (0.54/5)).round(2)%>
-<%ac5b=ac5b.round(2)%>
-<%ac5=(ac5b* (0.54/5)).round(2)%>
-<%ac6b=ac6b.round(2)%>
-<%ac6=(ac6b* (0.46/3)).round(2)%>
-<%ac7b=ac7b.round(2)%>
-<%ac7=(ac7b* (0.46/3)).round(2)%>
-<%ac8b=ac8b.round(2)%>
-<%ac8=(ac8b* (0.46/3)).round(2)%>
-<%ac = (ac1+ac2+ac3+ac4+ac5+ac6+ac7+ac8).round(2)%>
-<%act = (ac*0.2).round(2)%>
-<%rs1b=rs1b.round(2)%>
-<%rs1=(rs1b* (0.10)).round(2)%>
-<%rs4b=rs4b.round(2)%>
-<%rs4=(rs4b* (0.10)).round(2)%>
-<%rs5b=rs5b.round(2)%>
-<%rs5=(rs5b* (0.10)).round(2)%>
-<%rs6b=rs6b.round(2)%>
-<%rs6=(rs6b* (0.10)).round(2)%>
-<%rs8b=rs8b.round(2)%>
-<%rs8=(rs8b* (0.4/3)).round(2)%>
-<%rs9b=rs9b.round(2)%>
-<%rs9=(rs9b* (0.4/3)).round(2)%>
-<%rs=(rs1+rs4+rs5+rs6+rs8+rs9)%>
-<%rst=(rs * 0.19).round(2)%>
-<%global = (gobt+cut+act+rst).round(2) %>
+<%gobt = (gob*0.19).round(1)%>
+<%cu1b=punt.round(1)%>
+<%cu1=(cu1b*0.17).round(1)%>
+<%cu2b=pu.round(1)%>
+<%cu2=(cu2b*0.17).round(1)%>
+<%cu3b=pt.round(1)%>
+<%cu3=(cu3b*0.0725).round(1)%>
+<%cu4b=pe.round(1)%>
+<%cu4=(cu4b*0.0725).round(1)%>
+<%cu5b=pa.round(1)%>
+<%cu5=(cu5b*0.0725).round(1)%>
+<%cu6b=pj.round(1)%>
+<%cu6=(cu6b*0.0725).round(1)%>
+<%cu7b=s.round(1)%>
+<%cu7=(cu7b*0.37).round(1)%>
+<%cu =(cu1 + cu2 + cu3 + cu4 + cu5 + cu6 + cu7).round(1) %>
+<%cut = (cu * 0.22 ).round(1)%>
+<%global = puntaje %>
 
 
 <%= form.hidden_field 'global',:value => global %>
@@ -699,20 +374,21 @@
                     <div class="row pb-5 p-5" style="font-size: 12pt">
                         <div class="col-md-12">
 
-
-                            <%= wicked_pdf_image_tag image_url('/assets/red.jpg'), height: '120', width: '320'  %>
+                          <p>
+                            <img src="<%= asset_path 'red.jpg'%>" width="300" height="100" alt="">
                           </br>
                           </br>
                           <div class="col-md-11 text-center" >
-                              <p class="font-weight-bold mb-1" style="font-size: 18pt; font-family: monospace;"> RESIES "REPORTE Y EVALUACION DE LA SUSTENTABILIDAD DE INSTITUCIONES DE EDUCACION SUPERIOR"</p>
+                              <p class="font-weight-bold mb-1" style="font-size: 18pt; font-family: monospace;"> RESIES "REPORTE Y EVALUACIÓN DE LA SUSTENTABILIDAD DE INSTITUCIONES DE EDUCACIÓN SUPERIOR"</p>
                           </div>
                           </p>
+                            </br></br> </br></br>
                           <p>
                           </p>
                         </div>
                     </div>
                 </div>
-<div class="page-break">
+
                 <div class="card" >
                   <div class="row pb-5 p-5" style="font-size: 12pt">
                       &nbsp;&nbsp;&nbsp;<div class="col-md-2" style="background-color: 	#DCDCDC">
@@ -749,14 +425,14 @@
                                       <tr>
                                            <td class="font-weight-bold mb-1 text-center" style="font-size: 8pt; font-family: monospace; background-color: #BA55D3">Academia</td>
                                            <td style="background-color: #fff">0.2</td>
-                                           <td style="background-color: #fff"><%=ac%></td>
-                                           <td style="background-color: #fff"><%=act%></td>
+                                           <td style="background-color: #fff"></td>
+                                           <td style="background-color: #fff"></td>
                                       </tr>
                                       <tr>
                                            <td class="font-weight-bold mb-1 text-center" style="font-size: 8pt; font-family: monospace; background-color: #9ACD32">Gestión de campus</td>
                                            <td style="background-color: #fff">0.2</td>
-                                           <td style="background-color: #fff"><%=rs%></td>
-                                           <td style="background-color: #fff"><%=rst%></td>
+                                           <td style="background-color: #fff"></td>
+                                           <td style="background-color: #fff"></td>
                                       </tr>
                                       <tr>
                                            <td class="font-weight-bold mb-1 text-center" style="font-size: 8pt; font-family: monospace; background-color: 	#87CEEB">Responsabilidad social</td>
@@ -771,12 +447,13 @@
                           </br>
                         </div>
                       </div>
+
                     <div class="col-md-5" style="background-color: 	#FFF">
                       <section class="details-card">
                                           <div class="col-md-7">
                                           </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Bruto</p><br>
                                              <div class="card-img">
-                                            <%= bar_chart [["Gobernanza", gob],["Cultura", cu ],["Academia", ac  ],["Campus", ],["Responsabilidad", rs]]%>
+                                            <%= bar_chart [["Gobernanza", gob],["Cultura", cu ],["Academia",  ],["Campus", ],["Responsabilidad", ]]%>
                                            </div></div>
                        </section>
                       <section class="details-card">
@@ -784,19 +461,19 @@
                                              <div class="card-img">
                                              </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Ponderado</p><br>
 
-                                                 <%= pie_chart [["Gobernanza", gobt],["Cultura", cut],["Academia", act],["Responsabilidad", rst],["", 100-gobt-cut-act]]%>
+                                                 <%= pie_chart [["Gobernanza", gobt],["Cultura", cut],["", 100-gobt-cut]]%>
                                            </div></div>
                        </section>
                     </div>
                   </div>
+                </div>
 
-
-<div class="page-break">
-                <div class="panel-heading" style="background-color:  #fff">
+                <div class="panel-heading" style="background-color:  #80bfa6 ">
                      <p class="panel-title"  style="font-size: 25pt; font-family: monospace;" >Resultados por Categoría </p>
                 </div>
 
-                <div class="panel-heading" style="background-color:  #d0dffa">
+                <div class="card" style="background-color:  #d0dffa">
+                </br><div class="panel-heading">
                        <p class="font-weight-bold mb-2"  style="font-size: 18pt; font-family: monospace;" >Gobernanza y Seguimiento </p>
                   </div>
                   <div class="row pb-5 p-5" style="font-size: 12pt">
@@ -887,11 +564,10 @@
                        </section>
                     </div>
                   </div>
+                </div>
 
-</div>
-<div class="page-break">
-
-                <div class="panel-heading" style="background-color:  #ffd18c">
+                <div class="card" style="background-color:  #ffd18c">
+                </br><div class="panel-heading">
                        <p class="font-weight-bold mb-2"  style="font-size: 18pt; font-family: monospace;" >Cultura Sustentable </p>
                   </div>
                   <div class="row pb-5 p-5" style="font-size: 12pt">
@@ -992,12 +668,11 @@
                        </section>
                     </div>
                   </div>
-
-</div>
-<div class="page-break">
+                </div>
 
 
-                <div class="panel-heading" style="background-color:  #dabcf6">
+                <div class="card" style="background-color:  #dabcf6">
+                </br><div class="panel-heading">
                        <p class="font-weight-bold mb-2"  style="font-size: 18pt; font-family: monospace;" >Academia  </p>
                   </div>
                   <div class="row pb-5 p-5" style="font-size: 12pt">
@@ -1021,65 +696,65 @@
                                            <td  style="background-color:  #340c5a ;color: #fff">AC1</td>
                                            <td>Curso mínimo transversal pregrado</td>
                                            <td>0.11</td>
-                                           <td><%=ac1b%></td>
-                                           <td><%=ac1%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; " >
                                            <td  style="background-color:  #4e1287 ;color: #fff">AC2</td>
                                            <td>Capacitación de profesores</td>
                                            <td>0.11</td>
-                                           <td><%=ac2b%></td>
-                                           <td><%=ac2%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                            <td  style="background-color:#761cca ;color: #fff">AC3</td>
                                            <td>Evaluación del conocimientos en sustentabilidad de estudiantes</td>
                                            <td>0.11</td>
-                                           <td><%=ac3b%></td>
-                                           <td><%=ac3%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                            <td  style="background-color: #9c4be7 ;color: #fff">AC4</td>
                                            <td>Programas de postgrado que incluyen competencias de sustentabilidad</td>
                                            <td>0.11</td>
-                                           <td><%=ac4b%></td>
-                                           <td><%=ac4%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                            <td  style="background-color:	#c18ff0;color: #fff">AC5</td>
                                            <td>Programas y carreras de pregrado que incluyen competencias de sustentabilidad</td>
                                            <td>0.11</td>
-                                           <td><%=ac5b%></td>
-                                           <td><%=ac5%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                         <td rowspan="3" >Investigación y Transparencia</td>
                                            <td  style=" background-color: #ffb3d1;color: #fff">AC6</td>
                                            <td>Apoyo a la investigación en sustentabilidad</td>
                                            <td>0.15</td>
-                                           <td><%=ac6b%></td>
-                                           <td><%=ac6%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; " >
                                            <td  style=" background-color:   #ff80b3 ;color: #fff">AC7</td>
                                            <td>Investigación enfocada en sustentabilidad</td>
                                            <td>0.15</td>
-                                           <td><%= ac7b%></td>
-                                           <td><%= ac7%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                            <td  style=" background-color:  #ff3385;color: #fff">AC8</td>
                                            <td>Transferencia de conocimientos</td>
                                            <td>0.15</td>
-                                           <td><%= ac8b%></td>
-                                           <td><%= ac8%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
 
 
                                       <tr style="font-size: 12pt; ">
 
                                            <td colspan="3" class="font-weight-bold mb-2" >Resultado Categoría</td>
-                                           <td colspan="3" class="font-weight-bold mb-2" ><%=ac%></td>
+                                           <td colspan="3" class="font-weight-bold mb-2" ></td>
                                       </tr>
                                 </tbody>
                             </table>
@@ -1094,23 +769,22 @@
                                           <div class="col-md-6">
                                              <div class="card-img">
                                              </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Bruto</p><br>
-                                                 <%= bar_chart [["AC1", ac1b],["AC2", ac2b],["AC3", ac3b],["AC4", ac4b],["AC5", ac5b],["AC6", ac6b],["AC7", ac7b],["AC8", ac8b]]%>
+                                                 <%= bar_chart []%>
                                            </div></div>
                        </section>
                       <section class="details-card">
                                           <div class="col-md-6">
                                              <div class="card-img">
                                              </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Ponderado</p><br>
-                                                 <%= pie_chart [["AC1", ac1],["AC2", ac2],["AC3", ac3],["AC4", ac4],["AC5", ac5],["AC6", ac6],["AC7", ac7],["AC8", ac8],["", 100 - ac1-ac2-ac3-ac4-ac5-ac6-ac7-ac8]]%>
+                                                 <%= pie_chart []%>
                                            </div></div>
                        </section>
                     </div>
                   </div>
+                </div>
 
-              </div>
-              <div class="page-break">
-
-                <div class="panel-heading" style="background-color:   #ccffdd">
+                <div class="card" style="background-color:   #ccffdd">
+                </br><div class="panel-heading">
                        <p class="font-weight-bold mb-2"  style="font-size: 18pt; font-family: monospace;" >Gestión de Campus </p>
                   </div>
                   <div class="row pb-5 p-5" style="font-size: 12pt">
@@ -1273,10 +947,10 @@
                        </section>
                     </div>
                   </div>
+                </div>
 
-</div>
-
-                <div class="panel-heading" style="background-color:  #e6f7ff">
+                <div class="card" style="background-color:  #e6f7ff">
+                </br><div class="panel-heading">
                        <p class="font-weight-bold mb-2"  style="font-size: 18pt; font-family: monospace;" >Responsabilidad Social  </p>
                   </div>
                   <div class="row pb-5 p-5" style="font-size: 12pt">
@@ -1300,8 +974,8 @@
                                            <td  style="background-color:  	 #000d33 ;color: #fff">RS1</td>
                                            <td>Asequibilidad</td>
                                            <td>0.10</td>
-                                           <td><%=rs1b%></td>
-                                           <td><%=rs1%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; " >
                                            <td  style="background-color:  #001a66 ;color: #fff">RS2</td>
@@ -1322,22 +996,22 @@
                                            <td  style="background-color: #0033cc ;color: #fff">RS4</td>
                                            <td>Colaboración</td>
                                            <td>0.10</td>
-                                           <td><%=rs4b%></td>
-                                           <td><%=rs4%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                            <td  style="background-color:	0040ff;color: #fff">RS5</td>
                                            <td>Participación en políticas públicas</td>
                                            <td>0.10</td>
-                                           <td><%=rs5b%></td>
-                                           <td><%=rs5%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                            <td  style="background-color:	#3366ff	 ;color: #fff">RS6</td>
                                            <td>Comunidades vecinas</td>
                                            <td>0.10</td>
-                                           <td><%=rs6b%></td>
-                                           <td><%=rs6%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                         <td rowspan="3" >Trabajo justo</td>
@@ -1351,22 +1025,22 @@
                                            <td  style=" background-color: #99b3ff   ;color: #000">RS8</td>
                                            <td>Satisfacción laboral</td>
                                            <td>0.13</td>
-                                           <td><%=rs8b%></td>
-                                           <td><%=rs8%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
                                       <tr style="font-size: 8pt; ">
                                            <td  style=" background-color: #ccd9ff ;color: #000">RS9</td>
                                            <td>Sindicalización</td>
                                            <td>0.13</td>
-                                           <td><%=rs9b%></td>
-                                           <td><%=rs9%></td>
+                                           <td></td>
+                                           <td></td>
                                       </tr>
 
 
                                       <tr style="font-size: 12pt; ">
 
                                            <td colspan="3" class="font-weight-bold mb-2" >Resultado Categoría</td>
-                                           <td colspan="3" class="font-weight-bold mb-2" ><%=rst%></td>
+                                           <td colspan="3" class="font-weight-bold mb-2" ></td>
                                       </tr>
                                 </tbody>
                             </table>
@@ -1381,19 +1055,17 @@
                                           <div class="col-md-6">
                                              <div class="card-img">
                                              </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Bruto</p><br>
-                                                 <%= bar_chart [["RS1", rs1b],["RS4", rs4b],["RS5", rs5b],["RS6",rs6b],["RS8",rs8b],["RS9",rs9b]]%>
+                                                 <%= bar_chart []%>
                                            </div></div>
                        </section>
                       <section class="details-card">
                                           <div class="col-md-6">
                                              <div class="card-img">
                                              </br><p class="font-weight-bold mb-1 text-center" style="font-size: 10pt; font-family: monospace;">Puntaje Ponderado</p><br>
-                                                 <%= pie_chart [["RS1", rs1],["RS4",rs4],["RS5",rs5],["RS6",rs6],["RS8",rs8],["RS9",rs9],["",(100-rs1-rs4-rs5-rs6-rs8-rs9)]]%>
+                                                 <%= pie_chart []%>
                                            </div></div>
                        </section>
                     </div>
-                    <button class="btn btn-success  " style="font-size: 15pt;left: 80%; position: relative; " type="submit" >APROBADO</button>
-
                   </div>
                 </div>
 
@@ -1401,5 +1073,4 @@
             </div>
         </div>
     </div>
-
 <% end %>

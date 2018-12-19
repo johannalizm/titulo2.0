@@ -19,6 +19,7 @@ Rails.application.config.assets.precompile += %w( dynamic_states.js)
 Rails.application.config.assets.precompile += %w( mostrarpregunta.css)
 Rails.application.config.assets.precompile += %w( questions.js.coffee)
 Rails.application.config.assets.precompile += %w( formulariomostrar.css)
+Rails.application.config.assets.precompile += %w( chartkick.js )
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.

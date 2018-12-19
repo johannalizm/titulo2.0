@@ -1,7 +1,7 @@
 body, html
 {
 	height: 100%;
-	background-image: url('/assets/f2.jpg');
+	background-image: url('/assets/f3.jpg');
  	top: 0;
  	right: 0;
  	bottom: 0;
@@ -25,8 +25,8 @@ h4{text-align:center;margin:30px 0;color:#444}
 .main-timeline .timeline-content{width:50%;padding:0 50px;margin:52px 0 0;float:right;position:relative}
 .main-timeline .timeline-content:before{content:"";width:70%;height:100%;border:3px solid #4B0082e;border-top:none;border-right:none;position:absolute;bottom:-13px;left:35px}
 .main-timeline .timeline-content:after{content:"";width:37px;height:3px;background:#4B0082;position:absolute;top:13px;left:0}
-.main-timeline .title{font-size:20px;font-weight:600;color:#4B0082;text-transform:uppercase;margin:0 0 5px}
-.main-timeline .description{display:inline-block;font-size:16px;color:#000;line-height:20px;letter-spacing:1px;margin:0}
+.main-timeline .title{font-size:25px;font-weight:600;color:#4B0082;text-transform:uppercase;margin:0 0 5px}
+.main-timeline .description{display:inline-block;font-size:20px;color:#000;line-height:20px;letter-spacing:1px;margin:0}
 .main-timeline .timeline:nth-child(even) .timeline-icon{left:auto;right:30%}
 .main-timeline .timeline:nth-child(even) .timeline-icon:before{right:auto;left:-100px}
 .main-timeline .timeline:nth-child(even) .timeline-icon:after{right:auto;left:-30px}
@@ -41,10 +41,10 @@ h4{text-align:center;margin:30px 0;color:#444}
 .main-timeline .timeline:nth-child(3n) .timeline-icon{border-color:	#DC143C}
 .main-timeline .timeline:nth-child(3n) .title{color:	#DC143C}
 .main-timeline .timeline:nth-child(3n) .timeline-content:before{border-left-color:	#DC143C;border-bottom-color:	#DC143C}
-.main-timeline .timeline:nth-child(4n) .timeline-content:after,.main-timeline .timeline:nth-child(4n) .timeline-icon i,.main-timeline .timeline:nth-child(4n) .timeline-icon:before,.main-timeline .timeline:nth-child(4n):before{background:		#FFD700}
-.main-timeline .timeline:nth-child(4n) .timeline-icon{border-color:	#FFD700}
-.main-timeline .timeline:nth-child(4n) .title{color:		#FFF}
-.main-timeline .timeline:nth-child(4n) .timeline-content:before{border-left-color:		#FFD700;border-bottom-color:		#FFD700}
+.main-timeline .timeline:nth-child(4n) .timeline-content:after,.main-timeline .timeline:nth-child(4n) .timeline-icon i,.main-timeline .timeline:nth-child(4n) .timeline-icon:before,.main-timeline .timeline:nth-child(4n):before{background:		  #3333cc}
+.main-timeline .timeline:nth-child(4n) .timeline-icon{border-color:	  #3333cc}
+.main-timeline .timeline:nth-child(4n) .title{color:		 	  #3333cc}
+.main-timeline .timeline:nth-child(4n) .timeline-content:before{border-left-color:		  #3333cc;border-bottom-color:		  #3333cc}
 @media only screen and (max-width:1200px){.main-timeline .timeline-icon:before{width:50px;right:-50px}
 .main-timeline .timeline:nth-child(even) .timeline-icon:before{right:auto;left:-50px}
 .main-timeline .timeline-content{margin-top:75px}
