@@ -12,11 +12,15 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    
-
     build_resource(sign_up_params)
     resource.save
     redirect_to '/'
+    @institucione = Institucione.new
+    @institucione.id = @user.id
+    @institucione.tipoinstitucione_id = 1
+    @institucione.tiporelacione_id = 1
+    @institucione.region_id = 1
+    @institucione.save
   end
 
   # GET /resource/edit

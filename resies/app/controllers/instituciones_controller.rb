@@ -26,10 +26,12 @@ class InstitucionesController < ApplicationController
   # POST /instituciones.json
   def create
     @institucione = Institucione.new(institucione_params)
-
+    @institucione.tipoinstitucione_id = 1
+    @institucione.tiporelacione_id = 1
+    @institucione.region_id = 1
     respond_to do |format|
       if @institucione.save
-        format.html { redirect_to @institucione, notice: 'Institucione was successfully created.' }
+        format.html { redirect_to @institucione, notice: '' }
         format.json { render :show, status: :created, location: @institucione }
       else
         format.html { render :new }
@@ -43,7 +45,7 @@ class InstitucionesController < ApplicationController
   def update
     respond_to do |format|
       if @institucione.update(institucione_params)
-        format.html { redirect_to @institucione, notice: 'Institucione was successfully updated.' }
+        format.html { redirect_to @institucione, notice: '' }
         format.json { render :show, status: :ok, location: @institucione }
       else
         format.html { render :edit }

@@ -15,12 +15,10 @@
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user mycolor"></i></span>
                 <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control',placeholder:'nombre@institucion.com' %> </div>
-            <div class="input-group margin-bottom-20">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-lock mycolor"></i></span>
-                <%= f.password_field :password, autocomplete: "new-password", class: 'form-control',placeholder:'Password minimo 6 caracteres' %></div>
-            <div class="input-group margin-bottom-20">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-lock mycolor"></i></span>
-                <%= f.password_field :password_confirmation, autocomplete: "new-password",  class: 'form-control',placeholder:'Password Confirmation' %></div>
+
+               <%= f.hidden_field 'password',:value => 'redcampus14'%>
+
+                <%= f.hidden_field 'password',:value => 'redcampus14'%>
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user mycolor"></i></span>
                 <%= f.select  :rol, [['Administrador','admin'],['Usuario','user']],{include_blank: 'Ingrese Rol'} , {class: 'form-control'}%></div>
