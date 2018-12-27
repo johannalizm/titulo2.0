@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181219021053) do
+ActiveRecord::Schema.define(version: 20181227174525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20181219021053) do
     t.date "fecha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_formularios_on_user_id"
   end
 
   create_table "historia", force: :cascade do |t|
@@ -238,6 +240,7 @@ ActiveRecord::Schema.define(version: 20181219021053) do
   end
 
   add_foreign_key "alternativas", "questions"
+  add_foreign_key "formularios", "users"
   add_foreign_key "instituciones", "regions"
   add_foreign_key "instituciones", "tipoinstituciones"
   add_foreign_key "instituciones", "tiporelaciones"

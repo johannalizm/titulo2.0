@@ -4,7 +4,7 @@ class FormulariosController < ApplicationController
   # GET /formularios
   # GET /formularios.json
   def index
-    @formularios = Formulario.all
+    @formularios = Formulario.where(user_id: current_user.id)
   end
 
   # GET /formularios/1
@@ -17,7 +17,7 @@ class FormulariosController < ApplicationController
   # GET /formularios/new
   def new
     @formulario = Formulario.new
-    10.times{@formulario.resultados.build}
+    @formulario.resultados.build
     @questions = Question.order("indicador")
     @alternativas = Alternativa.all
     Rails.logger.debug("New method executed")
@@ -33,8 +33,8 @@ class FormulariosController < ApplicationController
   # POST /formularios
   # POST /formularios.json
   def create
-    @formulario = Formulario.new(formulario_params)
 
+    @formulario = current_user.formularios.new(formulario_params)
     respond_to do |format|
       if @formulario.save
 
