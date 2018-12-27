@@ -136,8 +136,8 @@
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-3 text-center">Pregunta</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Respuesta</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Descripción</th>
-                  <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Verificación</th>
                   <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">Comentario</th>
+                  <th class="border-0 text-uppercase small font-weight-bold col-xs-2 text-center">verificacion</th>
                 </tr>
               </table>
           </div>
@@ -161,8 +161,8 @@
                         <% elsif question.tiporespuesta == 'Ingresa Valor Manualmente' %>
                           <td class="col-xs-2"><%= s.text_area :respuesta,  placeholder:' Respuesta', class:'form-control' %></td>
                           <td class="col-xs-2"><%= s.text_area :descripcion, placeholder:' Descripción' , class:'form-control'%></td>
-                          <td class="col-xs-2"><%= s.text_area :verificacion, placeholder:' Verificación', class:'form-control'%></td>
                           <td class="col-xs-2"><%= s.text_area :comentario, placeholder:'Comentario' ,  class:'form-control' %></td>
+                          <td class="col-xs-2" ><%= s.file_field :verificacion, placeholder:' Verificación',class:'form-control'%></td>
                           <%= s.hidden_field 'question_id',:value => question.id%>
                         <%end%>
                       </tr>

@@ -17,7 +17,7 @@ class FormulariosController < ApplicationController
   # GET /formularios/new
   def new
     @formulario = Formulario.new
-    @formulario.resultados.build
+    10.times{@formulario.resultados.build}
     @questions = Question.order("indicador")
     @alternativas = Alternativa.all
     Rails.logger.debug("New method executed")
