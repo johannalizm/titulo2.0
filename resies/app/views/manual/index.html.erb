@@ -1,3 +1,4 @@
+<%if current_user %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -31,7 +32,7 @@
                                 <div class="timeline-content">
                                     <h3 class="title">MANUAL DE USO</h3>
                                     <p class="description">
-                                        Para ver el Manual de Uso debe acceder al icono de descargar y se abrira el documento en drive, donde podra ver el manual en linea o descargar. 
+                                        Para ver el Manual de Uso debe acceder al icono de descargar y se abrira el documento en drive, donde podra ver el manual en linea o descargar.
                                     </p>
                                 </div>
                             </a>
@@ -62,3 +63,11 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+<%else%>
+<script>
+    alert("Usted no puede ingresar a esta dirección");
+    window.location.href="/"
+</script>
+
+
+<%end%>

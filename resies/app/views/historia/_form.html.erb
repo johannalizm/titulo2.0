@@ -132,7 +132,8 @@
 <%gc3=0.0%>
 <%gc3s=0%>
 <%sgc3=0.0%>
-<%tsg3=0.0%>
+<%tsg3=0.0%><%u=0.0%>
+<%gc47f=0.0%><%gcres=0.0%><%sumgc=0.0%>
 <%gc71=0.0%><%gc72=0.0%><%gc73=0.0%><%di26=0.0%><%gc7t=0.0%><%gc7b=0.0%><%gc7=0%>
 <%gc10=0.0%><%gc99=0.0%><%gc10r=0.0%><%gcr10=0.0%><%gcs10=0.0%><%gc10s=0.0%><%gc82=0.0%><%gc81=0.0%><%gc81a=0.0%><%gc83=0.0%><%smgc=0.0%><%di25=0.0%>
 <%gcres=0.0%><%gc8b=0.0%><%gc8=0.0%><%gcr10r=0.0%><%gc10b=0.0%><%gc10=0.0%><%gc10h=0.0%><%gc13r=0.0%><%gc13b=0.0%><%gc13=0.0%><%gc141=0.0%><%gc142=0.0%>
@@ -223,6 +224,7 @@
                   <% if res.question.indicador == 'DI12' %>
                       <% di12 =  res.respuesta %>
                   <%elsif res.question.indicador == 'DI13' %>
+                      <% di13 =  res.respuesta %>
                   <%end%>
                  <%end%>
                  <%if  cu11 == '1.0'%>
@@ -233,7 +235,6 @@
                     <% ptj = 0%>
                   <%end%>
                   <%if val > 1 %>
-                  <% di13 =  res.respuesta %>
                   <% aux2 = 2000 * ptj * 1 %>
                   <% if aux2 > 100 %>
                       <% punt = 100%>
@@ -609,7 +610,11 @@
                       <% gc6s = gc6s + gc6r.to_f %>
                   <% end %>
                   <% if gc61 == '1.0' %>
-                      <% gc6b = gc6s %>
+                      <% if gc6s > 100 %>
+                        <%gc6b=100%>
+                      <%elsif%>
+                        <% gc6b = gc6s %>
+                      <%end%>
                   <% elsif %>
                       <% gc6b = 0 %>
                   <%end%>
@@ -619,7 +624,7 @@
                       <% gc71 = gc71.to_f * 100 %>
                   <%elsif resultado.question.indicador == 'GC7.2'%>
                       <% gc72 = resultado.respuesta %>
-                      <% gc72 = g72.to_f * 70 %>
+                      <% gc72 = gc72.to_f * 70 %>
                   <% elsif resultado.question.indicador == 'GC7.3'%>
                       <% gc73 = resultado.respuesta %>
                       <% gc73 = gc73.to_f * 50 %>
@@ -647,14 +652,14 @@
                     <% gc82 = resultado.respuesta %>
                 <% elsif %>
                     <% gc83 =  resultado.respuesta %>
-                    <% sumgc = sumagc + gc83 %>
+                    <% sumgc = sumgc + gc83.to_f %>
                 <%end%>
                 <% @resultados.each do |rs| %>
                   <% if rs.question.indicador == 'DI25' %>
                       <% di25 =  rs.respuesta.to_f %>
                  <%end%>
                 <%end%>
-                <% gcres = gc82 * sumgc %>
+                <% gcres = gc82.to_f * sumgc %>
                 <% gc812 = gc81.to_f + gc82.to_f %>
                 <% if di25 != '' || di25 != 0 %>
                   <% if gc812 > di25 %>
@@ -794,9 +799,9 @@
                   <%elsif resultado.question.indicador == 'RS4.5'%>
                     <% rs45 =resultado.respuesta%>
                     <%if rs4s > 60 %>
-                        <%rs4b = 60 %>
+                        <%rs4b = 60 + rs45.to_f %>
                     <% elsif%>
-                        <%rs4b = rs4s+rs45.to_f %>
+                        <%rs4b = rs4s + rs45.to_f %>
                     <%end%>
                   <%end%>
              <%elsif resultado.question.subcat.nombre == 'RS5. PArticipación en políticas públicas'%>

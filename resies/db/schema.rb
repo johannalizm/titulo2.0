@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20181227174525) do
 
   create_table "alternativas", force: :cascade do |t|
     t.string "nombre"
-    t.float "puntaje"
+    t.string "puntaje"
     t.bigint "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

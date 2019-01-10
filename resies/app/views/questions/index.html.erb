@@ -1,3 +1,6 @@
+<%if current_user %>
+<%if current_user.rol == "admin"  %>
+
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -12,7 +15,7 @@
 <div class="container" style="margin-top:20px;">
 <div class="row">
 <div id="user" class="col-md-12" >
-  <div class="panel panel-table animated slideInDown" style="background-color: #E0FFFF" >
+  <div class="panel panel-table " style="background-color: #E0FFFF" >
    <div class="panel-heading " style="padding:10px;">
      <div class="col col-xs-8 text-center">
             <p class="panel-title" style="font-size: 50pt" >Preguntas</p>
@@ -47,9 +50,9 @@
              </tr>
 
            <% end %>
-</br></br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
-<span class="	glyphicon glyphicon-edit" style="font-size: 20pt"><%= link_to 'Nueva Pregunta', new_question_path, class:'btn' %></span>
-
+           <div align= right style="marign:10px;">
+           <span  style="font-size: 20pt;"><%= paginate @questions %></span>
+           </div>
 
 </tbody>
 </table>
@@ -59,3 +62,17 @@
 <span  style="font-size: 18pt;"><%= paginate @questions %></span>
 </div>
 </div>
+<%else%>
+<script>
+    alert("Usted no puede ingresar a esta dirección");
+    window.location.href="/"
+</script>
+<%end%>
+<%else%>
+<script>
+    alert("Usted no puede ingresar a esta dirección");
+    window.location.href="/"
+</script>
+
+
+<%end%>

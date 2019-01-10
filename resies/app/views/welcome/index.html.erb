@@ -89,16 +89,7 @@
     	</div>
     	</div>
 
-    	<!--team-2-->
-    	<div class="col-lg-4">
-    	<div class="team-main">
-    	<div class="team-front">
-    	<img src="<%= asset_path 'instituciones.png'%>" class="img-fluid" />
-      <h3><a href="/instituciones/new">Nueva Institución</a></h3>
-    	</div>
-    	</div>
-      </div>
-    	<!--team-2-->
+
 
       <!--team-3-->
     	<div class="col-lg-4">
@@ -122,17 +113,6 @@
       </div>
       <!--team-4-->
 
-      <!--team-5-->
-      <div class="col-lg-4">
-      <div class="team-main">
-      <div class="team-front">
-      <img src="<%= asset_path 'preguntas.png'%>" class="img-fluid" />
-      <h3><a href="/questions/new"> Nueva Pregunta</a></h3>
-      </div>
-      </div>
-      </div>
-      <!--team-5-->
-
       <!--team-4-->
     	<div class="col-lg-4">
     	<div class="team-main">
@@ -148,4 +128,29 @@
 <%end%>
 
 </body>
+<footer  style="background-color: #E0FFFF">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 ">
+                <h4 style="color: #006400">RESIES</h4>
+                <p class="mb-3" style="color: #8B008B">
+                    Herramienta para reporte y evaluación de la sustentabilidad diseñada para instituciones de educación superior.
+                </p>
+            </div>
+            <div class="col-md-3 ">
+
+                <h4 style="color: #006400">RED CAMPUS</h4>
+                <li style="color: #8B008B"><a style="color: #8B008B" href="https://redcampussustentable.cl/">Red Campus Sustentable</a></li>
+            </div>
+
+            <div class="col-md-6  ">
+                <h4 style="color: #006400">PARTICIPANTES</h4>
+                <% @instituciones.each do |institucione| %>
+                <tr class="avatar"><img src="<%= institucione.avatar%>" width="60px" height="60px" style=" border-radius: 50%"></tr>
+              <% end %>
+            </div>
+
+        </div>
+    </div>
+</footer>
 </html>
